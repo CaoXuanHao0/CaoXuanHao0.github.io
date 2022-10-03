@@ -22,8 +22,8 @@ navigation:                # accepts {file, title, url, icon, sidebaricon}
 
 external:                  # shows a footer with social links - for available icons see fontawesome.com/icons
   - {title: Mail, icon: envelope, url: "mailto:21xuanhao.cao@gmail.com"}
-  - {title: Github, icon: github, url: "https://xuanhao.github.io"}
-  - {title: tweet, icon: rss, url: ""}
+  - {title: Github, icon: github, url: "https://caoxuanhao0.github.io/"}
+  - {title: Zhihu, icon: rss, url: "https://www.zhihu.com/people/a-fa-qing"}
 
 comments:
 #  disqus_shortname: ""    # see https://disqus.com/
