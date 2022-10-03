@@ -16,14 +16,13 @@ minimal: false             # use a dark header
 # Menu
 
 navigation:                # accepts {file, title, url, icon, sidebaricon}
-  - {file: "index.html",  title:"Home"}
+  - {file: "index.md",  title:"Home"}
   - {file: "README.md", title:"About Me"}
   - {file: "Blog.html", title:"Blog"}
 
 external:                  # shows a footer with social links - for available icons see fontawesome.com/icons
   - {title: Mail, icon: envelope, url: "mailto:21xuanhao.cao@gmail.com"}
-  - {title: Github, icon: github, url: "https://caoxuanhao0.github.io/"}
-  - {title: Zhihu, icon: rss, url: "https://www.zhihu.com/people/a-fa-qing"}
+  - {title: Github, icon: github, url: "https://github.com/CaoXuanHao0"}
 
 comments:
 #  disqus_shortname: ""    # see https://disqus.com/
