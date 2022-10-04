@@ -1,5 +1,5 @@
 ---
-title:  "pur test example"
+title:  "our test example"
 mathjax: true
 layout: post
 categories: media
