@@ -37,7 +37,7 @@ Do survey on current development of big data distributed platform architecture.
 
 # **WORK EXPERIENCE**
 ## **Hainan JinKen Cyber Information Technology Limited Company**
-**2021.07 - 2022.09**
+*2021.07 - 2022.09*
 Product Development Assistant Intern
 
 # 
