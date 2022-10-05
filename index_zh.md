@@ -3,7 +3,7 @@ layout: page
 title: "Home"
 ---
 
-# **EDUCATION**
+# *EDUCATION*
 ## **University of Tuebingen**
 **2021.10 - Present**
 * Machine learinig | Master | Department of Computer Science
