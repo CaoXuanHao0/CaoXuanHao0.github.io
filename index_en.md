@@ -5,19 +5,19 @@ title: "Home"
 
 Hello, welcome to my personal webpage!  
 I'm **Xuanhao Cao**, a master student of Machine Learning @ University of Tuebingen.  
-My research interest lies in *explainable AI*, especially for the current popular transformer based model.
+My research interest lies in **explainable AI**, especially for the current popular transformer based model.
 
 <br/>
 
 ### EDUCATION
 **University of Tuebingen，      2021.10 - Present**
-* Machine learinig | Master | Department of Computer Science
+Machine learinig | Master | Department of Computer Science
 
 **Beihang University，      2017.09 - 2021.06**
-* Information System and Information Management | Bachelor | School of Economics and Management 
+Information System and Information Management | Bachelor | School of Economics and Management 
 
 **Beihang University，      2018.09 - 2021.06**
-* Math | Bachelor second degree | School of Mathematics and Syetem Science  
+Math | Bachelor second degree | School of Mathematics and Syetem Science  
 
 <br/>
 <br/>
