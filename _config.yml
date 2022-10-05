@@ -19,7 +19,7 @@ navigation:                # accepts {file, title, url, icon, sidebaricon}
   - {file: "index_en.md",  title:"Home"}
   - {file: "Blog.html", title:"Blog"}
   - {file: "index_zh.md", title:"个人主页"}
-  - {file: "Blog_zh.html", title:"博客"}
+  - {file: "Blog_zh.md", title:"博客"}
 
 external:                  # shows a footer with social links - for available icons see fontawesome.com/icons
   - {title: Mail, icon: envelope, url: "mailto:21xuanhao.cao@gmail.com"}
