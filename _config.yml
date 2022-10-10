@@ -2,7 +2,7 @@ title: "Xuanhao Cao"
 author: "Xuanhao Cao"
 description: "M.Sc ML @ Uni Tuebingen"
 permalink: /:title/
-lang: "en", "zh"
+lang: "en"
 excerpt_separator: "\n\n\n"
 date_format: "%B %d, %Y"
 
