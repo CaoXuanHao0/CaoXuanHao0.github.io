@@ -12,14 +12,17 @@ And I'm also very enthusiastic about the latest advance of ML!
 <hr/>
 
 ### **EDUCATION**
-**University of Tuebingen，      2021.10 - Present** <br/>
+**University of Tuebingen，      2021.10 - Present**    
 | Machine learinig | Master | Department of Computer Science |
+|------------------|------------------|-----------------|
 
-**Beihang University，      2017.09 - 2021.06** <br/>
+**Beihang University，      2017.09 - 2021.06**    
 | Information System and Information Management | Bachelor | School of Economics and Management |
+|------------------|------------------|-----------------|
 
-**Beihang University，      2018.09 - 2021.06** <br/>
+**Beihang University，      2018.09 - 2021.06**    
 | Math | Bachelor second degree | School of Mathematics and Syetem Science |
+|------------------|------------------|-----------------|
 
 <br/>
 
