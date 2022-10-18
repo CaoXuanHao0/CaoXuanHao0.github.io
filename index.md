@@ -16,11 +16,11 @@ And I'm also very enthusiastic about the latest advance of ML!
 Machine learinig | Master | Department of Computer Science 
 
 **Beihang University，      2017.09 - 2021.06**    
-Information System and Information Management | Bachelor | School of Economics and Management
+Information System and Information Management | Bachelor
 
 
 **Beihang University，      2018.09 - 2021.06**    
-Math | Bachelor second degree | School of Mathematics and Syetem Science
+Math | Bachelor second degree
 
 
 <br/>
@@ -28,20 +28,20 @@ Math | Bachelor second degree | School of Mathematics and Syetem Science
 ### **RESEARCH EXPERIENCE**
 **Intern，    2022.04 - Present**
 * University of Tuebingen, Prof. Zeynep Akata's group     
-Work on Explanable methods for CNN and ViT.
+Work on Explanable methods for CNNs and Transformer based models.
 
-**Research assistant，    2021.09 - 2022.05**
+**Research assistant，    2020.09 - 2021.05**
 * Beihang University, Lecturer Hao Peng's group    
 Run experiments, implement models for paper / project in the field of Federated Learning, Reinforcement Learning, and Graph Neural Network.
 
-**Research assistant，     2021.03 - 2022.07**
+**Research assistant，     2020.03 - 2021.07**
 * Beihang University, Lecturer Chu Zhang's group <br/>
 Do survey on current development of big data distributed platform architecture.
 
 <br/>
 
 ### **WORK EXPERIENCE**
-**Hainan JinKen Cyber Information Technology Limited Company，       2021.07 - 2022.09** <br/>
+**Hainan JinKen Cyber Information Technology Limited Company，       2020.07 - 2020.09** <br/>
 * Product Development Assistant Intern
 
 
