@@ -1,3 +1,10 @@
+---
+title:  "Adversarial generalisation"
+mathjax: true
+layout: post
+categories: media
+---
+
 Adversarial generalisation
 
 It\'s a ML technique for \"preparing and generalizing for the worst
