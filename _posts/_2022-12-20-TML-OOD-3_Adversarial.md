@@ -5,7 +5,7 @@ layout: post
 categories: media
 ---
 
-Adversarial generalisation
+## Adversarial generalisation
 
 It\'s a ML technique for \"preparing and generalizing for the worst
 case\".
