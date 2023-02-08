@@ -28,8 +28,8 @@ Math | Bachelor second degree
 ### **RESEARCH EXPERIENCE**
 **Intern，    2022.04 - Present**
 * University of Tuebingen, Prof. Zeynep Akata's group     
-Explanation for vision model (CNNs and ViT).
-Explanation for feature alignment in ViT.
+Explanation for vision model (CNNs and ViT). \
+Explanation of feature alignment in ViT.
 
 **Research assistant，    2020.09 - 2021.05**
 * Beihang University, Lecturer Hao Peng's group    
