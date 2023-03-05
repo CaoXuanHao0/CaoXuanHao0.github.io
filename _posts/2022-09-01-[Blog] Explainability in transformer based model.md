@@ -1,6 +1,7 @@
 ---
 title: "Explainability in transformer based model"
 layout: post
+mathjax: true
 ---
 
 
