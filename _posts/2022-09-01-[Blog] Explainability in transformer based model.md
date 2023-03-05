@@ -225,10 +225,7 @@ Perturbation-based method aims to measure how much a token uses other context to
 
 In Value Zeroing, to measure attribution of input token $$i$$ to output token $$j$$ , it zeros the input value vector of token $$i$$ when calculating the output of token $$j$$ :
 
-![图片](/assets/blog1/image10.png)
-
-
-set $$v_j$$=0
+output: $ z_i^h=\sum_{j=1}^{n}{\alpha_{i,j}^h v_j^h} $, and set $ v_j=0 $
 
 This provides an alternative output representation $$\tilde{x}_ i^{-j}$$. And then measure how much output changes by:
 
