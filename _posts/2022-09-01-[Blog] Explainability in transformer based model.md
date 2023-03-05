@@ -21,12 +21,12 @@ $$y_i = \sum_{j}^{}{\alpha_{i,j} v_j}$$
 
 So intuitively, we can use these weights$$\alpha_{ij}$$from attention matrix$$A$$ to quantify how important is the input tokens to output tokens, where each row corresponds to a relevance map for each token given the other tokens.
 
-Since we focus on classification models, only the [CLS] token, which encapsulates the explanation of the classification, is considered. The relevance map is, therefore, derived from the row  $$C_{[CLS]} ∈ R _s$$ that corresponds to the [CLS] token. This row contains a score evaluating each token's influence on the classification token：
+Since we focus on classification models, only the [CLS] token, which encapsulates the explanation of the classification, is considered. The relevance map is, therefore, derived from the row  $$C_{[CLS]} ∈ R_s$$ that corresponds to the [CLS] token. This row contains a score evaluating each token's influence on the classification token：
 
 ![图片](/assets/blog1/image2.png)
 
 
-Typically people use the last layer's attention matrix (yields better results). It's a vector of 1*197 dim. To visualize it like an image, we can first discard the first element (it's the importance of [CLS] token to [CLS] token; not so important) to get a 1*196 dim vector, and then reshape it into a 14*14 matrix to get a token level explanation. But we care about pixel-level explanation, so what we typically do is use bilinear interpolation to upsample it into a 224*224 image (Same size as the input image. Here we use the ImageNet dataset's image as an example).
+Typically people use the last layer's attention matrix (yields better results). It's a vector of 1\*197 dim. To visualize it like an image, we can first discard the first element (it's the importance of [CLS] token to [CLS] token; not so important) to get a 1\*196 dim vector, and then reshape it into a 14*14 matrix to get a token level explanation. But we care about pixel-level explanation, so what we typically do is use bilinear interpolation to upsample it into a 224\*224 image (Same size as the input image. Here we use the ImageNet dataset's image as an example).
 
 Here's what we get:
 
@@ -70,21 +70,21 @@ The Attention rollout method makes a few assumptions to simplify the problem:
 * **(1) Head aggregation by average**
 It assumes all heads are equal, so we can just average over them:
 
-$$E_h A^{(b)} = \frac{1}{M} \sum_{m}^{}{A^{(b)}_m}$$
+$$E_h A^{(b)} = \frac{1}{M}\sum_{m}^{}{A_m^{(b)}}$$
 
 (here "b" means block b)
 
 * **(2) Layer (Block) aggregation by (attntion) matrix multiplication**
 It assumes attentions are combined linearly -- self-attention layers are stacked linearly one after another, and another mechanism (like FFN) does not make any changes to how the model uses input features to make decisions. 
 
-But residual connection matters. So we can model it as$$\hat{A}^{(b)}=I+E_h A^{(b)}$$（you can see it as $$y_i = y_i+\sum_{j}^{}{\alpha_{i,j} v_j}=(1+\alpha_{ii})y_i+\sum_{j\ne i}^{}{\alpha_{i,j} v_j}$$）,  and then normalize it to make each row sum up to 1 again: $$\hat{A}^{(b)}= \hat{A}^{(b)} / \hat{A}^{(b)}.sum(dim=-1)$$.   
+But residual connection matters. So we can model it as $$\hat{A}^{(b)}=I+E_h A^{(b)}$$（you can see it as $$y_i = y_i+\sum_{j}^{}{\alpha_{i,j} v_j}=(1+\alpha_{ii})y_i+\sum_{j\ne i}^{}{\alpha_{i,j} v_j}$$）,  and then normalize it to make each row sum up to 1 again: $$\hat{A}^{(b)}= \hat{A}^{(b)} / \hat{A}^{(b)}.sum(dim=-1)$$ .   
 
 And then use matrix multiplication to aggregate across layers:
 
 ![图片](/assets/blog1/image4.png)
 
 
-This is bc we model the attribution of token$$i$$at block$$b$$to token$$j$$at block$$b+1$$as: 
+This is bc we model the attribution of token $$i$$ at block $$b$$ to token $$j$$ at block $$b+1$$ as: 
 
 ![图片](/assets/blog1/image5.png)
 
@@ -101,11 +101,11 @@ Since each head captures different features, and thus has different importance, 
 
 (Other choices of aggregation, like taking the minimum, or taking the maximum, are less effective as a gradient. It also enables a class-specific signal. )
 
-$$E_h A^{(b)} = \frac{1}{M} \sum_{m}^{} ∇A^{(b)}_m\odot A^{(b)}_m$$
+$$E_h A^{(b)} = \frac{1}{M} \sum_{m}^{} ∇A^{(b)}_m \odot A^{(b)}_m$$
 
 And in order to compute the weighted attention relevance, we consider only the positive values of the gradients-relevance multiplication, resembling positive relevance.
 
-$$E_h A^{(b)} = \frac{1}{M} \sum_{m}^{} ∇A^{(b)}_m\odot A^{(b)+}_m$$
+$$E_h A^{(b)} = \frac{1}{M} \sum_{m}^{} ∇A_m^{(b)}\odot A_m^{(b)+}$$
 
 * **(2) Layer (Block) aggregation by (attention) matrix multiplication**
 Same as before.
@@ -158,7 +158,7 @@ Argue that although some tokens might have large attention weights $$\alpha_{ij}
 ![图片](/assets/blog1/image7.png)
 
 
-So instead of using attention weights $$\alpha_{ij}$$ as attribution of token $$j$$ to token $$i$$ , propose to use the norm $$||\alpha_{ij}f(x_j)||$$ .
+So instead of using attention weights $$\alpha_{ij}$$ as attribution of token $$j$$ to token $$i$$ , propose to use the norm $$\||\alpha_{ij}f(x_j)\||$$ .
 
 #### 1.6 Limitation 
 
@@ -223,20 +223,20 @@ The intuition is, if the feature map highlights the important region of the inpu
 
 Perturbation-based method aims to measure how much a token uses other context tokens to build its output representation $$\tilde{x}_i$$ at each encoder layer by perturbing input token.
 
-In Value Zeroing, to measure attribution of input token$$i$$to output token$$j$$, it zeros the input value vector of token$$i$$when calculating the output of token$$j$$:
+In Value Zeroing, to measure attribution of input token $$i$$ to output token $$j$$ , it zeros the input value vector of token $$i$$ when calculating the output of token$$j$$:
 
 ![图片](/assets/blog1/image10.png)
 
 
 set $$v_j$$=0
 
-This provides an alternative output representation $$\tilde{x}_i^{-j}$$. And then measure how much output changes by:
+This provides an alternative output representation $$\tilde{x}_ i^{-j}$$. And then measure how much output changes by:
 
 $$C_{i,j} = \tilde{x}_i^{-j} * \tilde{x}_i$$
 
 where the operation ∗ can be any pairwise distance metric (eg. cosine distance).
 
-The intuition is, if input token$$i$$is important to output token $$j$$ , then masking input token $$i$$ out will make $$\tilde{x}_i$$ change a lot and yield a large distance between $$\tilde{x}_i$$ and $$\tilde{x}_i^{-j}$$.
+The intuition is, if input token$$i$$is important to output token $$j$$ , then masking input token $$i$$ out will make $$\tilde{x}_ i$$ change a lot and yield a large distance between $$\tilde{x}_ i$$ and $$\tilde{x}_ i^{-j}$$.
 
 For all input token $$i$$ and output token $$j$$ , we can calculate $$C_{i,j}$$ as above, generating a map similar to attention map. And then we can aggregate over layers and heads as before.
 
