@@ -13,7 +13,7 @@ We first discuss the most popular method -- Attention-based method, including Ra
 
 Recap that, in the self-attention mechanism, the output is the weighted sum of input: 
 
-![图片](images/image1.png)
+![图片](/assets/blog1/image1.png)
 
 More specificly, the output $$y_i$$ of token $$i$$ is computed as a weighted sum of all input tokens, where the weights $$\alpha_{ij}$$ are given by the attention matrix $$A$$ :
 
