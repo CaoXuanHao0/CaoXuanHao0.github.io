@@ -26,7 +26,7 @@ Since we focus on classification models, only the [CLS] token, which encapsulate
 ![图片](/assets/blog1/image2.png)
 
 
-Typically people use the last layer's attention matrix (yields better results). It's a vector of 1\*197 dim. To visualize it like an image, we can first discard the first element (it's the importance of [CLS] token to [CLS] token; not so important) to get a 1\*196 dim vector, and then reshape it into a 14*14 matrix to get a token level explanation. But we care about pixel-level explanation, so what we typically do is use bilinear interpolation to upsample it into a 224\*224 image (Same size as the input image. Here we use the ImageNet dataset's image as an example).
+Typically people use the last layer's attention matrix (yields better results). It's a vector of 1\*197 dim. To visualize it like an image, we can first discard the first element (it's the importance of [CLS] token to [CLS] token; not so important) to get a 1\*196 dim vector, and then reshape it into a 14\*14 matrix to get a token level explanation. But we care about pixel-level explanation, so what we typically do is use bilinear interpolation to upsample it into a 224\*224 image (Same size as the input image. Here we use the ImageNet dataset's image as an example).
 
 Here's what we get:
 
@@ -101,7 +101,7 @@ Since each head captures different features, and thus has different importance, 
 
 (Other choices of aggregation, like taking the minimum, or taking the maximum, are less effective as a gradient. It also enables a class-specific signal. )
 
-$$E_h A^{(b)} = \frac{1}{M} \sum_{m}^{} ∇A^{(b)}_m \odot A^{(b)}_m$$
+$$E_h A^{(b)} = \frac{1}{M} \sum_{m}^{} ∇A_m^{(b)} \odot A_m^{(b)}$$
 
 And in order to compute the weighted attention relevance, we consider only the positive values of the gradients-relevance multiplication, resembling positive relevance.
 
@@ -207,23 +207,23 @@ And Gradients can be calculated easily using backprop. We use gradient as weight
 
 We first extract feature maps as above.
 
-But instead of using gradient as weight, we first apply feature maps as masks M to perturb input X, and then the output is the weight. 
+But instead of using gradient as weight, we first apply feature maps as masks M to perturb input $X$, and then the output is the weight. 
 
 ![图片](/assets/blog1/image9.png)
 
 
-Here Rd is a matrix of random numbers, which has the same size as feature map
+Here $Rd$ is a matrix of random numbers, which has the same size as feature map
 
-The intuition is, if the feature map highlights the important region of the input image, then retaining this region by $$X\odot M_I$$ and masking another region out (or blur it with$$Rd\odot(1-M_i)$$ ) will yield a high output classification score.
+The intuition is, if the feature map highlights the important region of the input image, then retaining this region by $$X\odot M_I$$ and masking another region out (or blur it with $$Rd\odot(1-M_i)$$ ) will yield a high output classification score.
 
 
 #### 2.3 Perturbation-based method
 
 (1) Value Zeroing [8]
 
-Perturbation-based method aims to measure how much a token uses other context tokens to build its output representation $$\tilde{x}_i$$ at each encoder layer by perturbing input token.
+Perturbation-based method aims to measure how much a token uses other context tokens to build its output representation $$\tilde{x}_ i$$ at each encoder layer by perturbing input token.
 
-In Value Zeroing, to measure attribution of input token $$i$$ to output token $$j$$ , it zeros the input value vector of token $$i$$ when calculating the output of token$$j$$:
+In Value Zeroing, to measure attribution of input token $$i$$ to output token $$j$$ , it zeros the input value vector of token $$i$$ when calculating the output of token $$j$$ :
 
 ![图片](/assets/blog1/image10.png)
 
@@ -232,7 +232,7 @@ set $$v_j$$=0
 
 This provides an alternative output representation $$\tilde{x}_ i^{-j}$$. And then measure how much output changes by:
 
-$$C_{i,j} = \tilde{x}_i^{-j} * \tilde{x}_i$$
+$$C_{i,j} = \tilde{x}_ i^{-j} * \tilde{x}_ i$$
 
 where the operation ∗ can be any pairwise distance metric (eg. cosine distance).
 
