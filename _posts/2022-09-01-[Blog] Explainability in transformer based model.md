@@ -13,7 +13,9 @@ We first discuss the most popular method -- Attention-based method, including Ra
 
 Recap that, in the self-attention mechanism, the output is the weighted sum of input: 
 
-![图片](/assets/blog1/image1.png)
+$$A=softmax(\frac{Q·K^T}{\sqrt{d_h}})$$
+
+$$O=A·V$$
 
 More specificly, the output $$y_i$$ of token $$i$$ is computed as a weighted sum of all input tokens, where the weights $$\alpha_{ij}$$ are given by the attention matrix $$A$$ :
 
@@ -225,7 +227,10 @@ Perturbation-based method aims to measure how much a token uses other context to
 
 In Value Zeroing, to measure attribution of input token $$i$$ to output token $$j$$ , it zeros the input value vector of token $$i$$ when calculating the output of token $$j$$ :
 
-output: $ z_i^h=\sum_{j=1}^{n}{\alpha_{i,j}^h v_j^h} $, and set $ v_j=0 $
+output: $$ z_i^h=\sum_{j=1}^{n}{\alpha_{i,j}^h v_j^h} $$, and set $$ v_j=0 $$
+
+output$$z_i^h=\sum_{j=1}^{n}{\alpha_{i,j}^h v_j^h}$$, and set$$v_j=0$$
+
 
 This provides an alternative output representation $$\tilde{x}_ i^{-j}$$. And then measure how much output changes by:
 
