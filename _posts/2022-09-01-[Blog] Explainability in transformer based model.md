@@ -160,7 +160,7 @@ Argue that although some tokens might have large attention weights $$\alpha_{ij}
 ![图片](/assets/blog1/image7.png)
 
 
-So instead of using attention weights $$\alpha_{ij}$$ as attribution of token $$j$$ to token $$i$$ , propose to use the norm $$\||\alpha_{ij}f(x_j)\||$$ .
+So instead of using attention weights $$\alpha_{ij}$$ as attribution of token $$j$$ to token $$i$$ , propose to use the norm $$\|\|\alpha_{ij}f(x_j)\|\|$$ .
 
 #### 1.6 Limitation 
 
