@@ -1,4 +1,7 @@
-
+---
+title: "Explainability in transformer based model"
+layout: post
+---
 
 
 In this artical, we focus on explaing Transformer model's behavior, i.e., on which input features does the Transformer model use to make output (classification) decision. 
