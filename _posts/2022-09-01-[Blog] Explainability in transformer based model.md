@@ -211,7 +211,7 @@ We first extract feature maps as above.
 
 But instead of using gradient as weight, we first apply feature maps as masks M to perturb input $X$, and then the output is the weight. 
 
-![图片](/assets/blog1/image9.png)
+<center>![图片](/assets/blog1/image9.png)</center>
 
 
 Here $Rd$ is a matrix of random numbers, which has the same size as feature map
@@ -227,7 +227,7 @@ Perturbation-based method aims to measure how much a token uses other context to
 
 In Value Zeroing, to measure attribution of input token $$i$$ to output token $$j$$ , it zeros the input value vector of token $$i$$ when calculating the output of token $$j$$ :
 
-<center>output: $$ z_i^h=\sum_{j=1}^{n}{\alpha_{i,j}^h v_j^h} $$, and set $$ v_j=0 $$</center>
+<center>output: $ z_i^h=\sum_{j=1}^{n}{\alpha_{i,j}^h v_j^h} $, and set $ v_j=0 $</center>
 
 This provides an alternative output representation $$\tilde{x}_ i^{-j}$$. And then measure how much output changes by:
 
