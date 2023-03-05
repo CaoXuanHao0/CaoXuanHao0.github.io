@@ -4,29 +4,32 @@ layout: post
 mathjax: true
 ---
 
-In this artical, we focus on explaing Transformer model's behavior, i.e., on which input features does the Transformer model use to make output (classification) decision. 
+In this article, we focus on explaining Transformer model's behavior, i.e., on which input features the Transformer model uses to make output (classification) decisions. 
 
-We first discuss the most popular method -- Attention-based method, including Raw Attention, Attenion Rollout and its variant, and then talk about applying explanation method in CNN to Transformer.
+We first discuss the most popular method -- Attention-based method, including Raw Attention, Attenion Rollout and its variant, and then talk about applying the explanation method in CNN to Transformer.
 
-1. Attention-based method
+\section{Attention-based method}
+
 #### 1.1 Raw attention
 
-Recap that, in self-attention mechnism, the output is the weighted sum of input: 
+Recap that, in the self-attention mechanism, the output is the weighted sum of input: 
 
-![图片](/_posts/images/image1.png)
+\includegraphics[width=0.25\textwidth]{images/image1.png}
+\centering
 
-More specificly, the output $$y_i$$ of token $$i$$ is computed as a weighted sum of all input tokens, where the weights $$\alpha_{ij}$$ are given by the attention matrix$$A$$:
+
+More specifically, the output $y_i$ of token $i$ is computed as a weighted sum of all input tokens, where the weights $\alpha_{ij}$ are given by the attention matrix $A$:
 
 $$y_i = \sum_{j}^{}{\alpha_{i,j} v_j}$$
 
-So intuitively, we can use these weights$$\alpha_{ij}$$from attention matrix$$A$$ to quantify how important is the input tokens to output tokens, where each row corresponds to a relevance map for each token given the other tokens.
+So intuitively, we can use these weights $\alpha_{ij}$ from attention matrix $A$ to quantify how important is the input tokens to output tokens, where each row corresponds to a relevance map for each token given the other tokens.
 
-Since we focuses on classification models, only the [CLS] token, which encapsulates the explanation of the classification, is considered. The relevance map is, therefore, derived from the row $$C_{[CLS]} ∈ R_s$$ that corresponds to the [CLS] token. This row contains a score evaluating each token's influence on the classification token：
+Since we focus on classification models, only the [CLS] token, which encapsulates the explanation of the classification, is considered. The relevance map is, therefore, derived from the row $$C_{[CLS]} ∈ R_s$$ that corresponds to the [CLS] token. This row contains a score evaluating each token's influence on the classification token：
 
-![图片](images/image2.png)
+![图片](/_posts/images/image2.png)
 
 
-Typically poeple use last layer's attention matrix (yields better result). It's a vector of 1\*197 dim. To visualize it like an image, we can first discard the first element (it's the importance of [CLS] token to [CLS] token; not so important) to get a 1\*196 dim vector, and then reshape it into a 14\*14 matrix to get a token level explanation. But we care about pixel evel explanation, so what we typically do is to use bilinear interpolation to upsample it into a 224*224 image (Same size of input image. Here we use ImageNet dataset's image as an example).
+Typically people use the last layer's attention matrix (yields better results). It's a vector of 1\*197 dim. To visualize it like an image, we can first discard the first element (it's the importance of [CLS] token to [CLS] token; not so important) to get a 1\*196 dim vector, and then reshape it into a 14\*14 matrix to get a token level explanation. But we care about pixel-level explanation, so what we typically do is use bilinear interpolation to upsample it into a 224*224 image (Same size as the input image. Here we use the ImageNet dataset's image as an example).
 
 Here's what we get:
 
