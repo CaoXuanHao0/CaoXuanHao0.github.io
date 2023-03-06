@@ -169,6 +169,10 @@ So instead of using attention weights $$\alpha_{ij}$$ as attribution of token $$
 * ignore FFN and negative components in each attention block.
 * ignore non-linearity in self-attention.
 
+(2) There's a debate about whether attention is a faithful explanation. Some of their observations are: attention attribution is not correlated well with other explanation methods' result, and randomly perturbing attention does not affect model's prediction [6].
+
+But [7] provides a possible answer of why discarding learned attention patterns has low impact: most info are preserved by residual connection, so only perturbing attention does not change too much.
+
 ### 2. Applying explanation methods of CNN to Transformer
 Previously we talked about the Attention-based method, which is uniquely designed for Transformers because it uses a unique element of the attention map.
 
@@ -193,7 +197,7 @@ For more about strided convolutions causing checkboard artifact, see: [https://d
 
 **（1）Grad-CAM**
 
-We can extract feature maps as follows [6]:
+We can extract feature maps as follows [8]:
 
 >In ViT the output of the layers is typically BATCH x 197 x 192. At dimension 197, the first element represents the class token, and the rest represents the 14x14 patches in the image. We can treat the last 196 elements as a 14x14 spatial image, with 192 channels.
 >Since the final classification is done on the class token computed in the last attention block, the output will not be affected by the 14x14 channels in the last layer. The gradient of the output with respect to them will be 0!
@@ -205,7 +209,7 @@ target_layers = [model.blocks[-1].norm1]
 And Gradients can be calculated easily using backprop. We use gradient as weights of features, and then Combine those two terms, we get **Grad-CAM**.
 
 
-**(2) ViT-CX [7]**
+**(2) ViT-CX [9]**
 
 We first extract feature maps as above.
 
@@ -221,7 +225,7 @@ The intuition is, if the feature map highlights the important region of the inpu
 
 #### 2.3 Perturbation-based method
 
-(1) Value Zeroing [8]
+(1) Value Zeroing [10]
 
 Perturbation-based method aims to measure how much a token uses other context tokens to build its output representation $$\tilde{x}_ i$$ at each encoder layer by perturbing input token.
 
@@ -235,9 +239,21 @@ $$C_{i,j} = \tilde{x}_ i^{-j} * \tilde{x}_ i$$
 
 where the operation ∗ can be any pairwise distance metric (eg. cosine distance).
 
-The intuition is, if input token$$i$$is important to output token $$j$$ , then masking input token $$i$$ out will make $$\tilde{x}_ i$$ change a lot and yield a large distance between $$\tilde{x}_ i$$ and $$\tilde{x}_ i^{-j}$$.
+The intuition is, if input token $$i$$ is important to output token $$j$$ , then masking input token $$i$$ out will make $$\tilde{x}_ i$$ change a lot and yield a large distance between $$\tilde{x}_ i$$ and $$\tilde{x}_ i^{-j}$$.
 
 For all input token $$i$$ and output token $$j$$ , we can calculate $$C_{i,j}$$ as above, generating a map similar to attention map. And then we can aggregate over layers and heads as before.
+
+#### 2.4 Activation Maximization
+
+Optimize over input image to maximize the output of a "unit" $$S_c(I)$$ (can be mean of a layer or token) in Transformer:
+
+$$argmax_I \ S_c(I)-\lambda ||I||^2_2$$
+
+The second term is a spatial regularization term (to make the result smoother). The results also have checkboard artifact:
+
+![图片](/assets/blog1/image11.png)
+
+>Instead of getting a continuous image, we get 14x14 patches, many neighboring patches look similar, but they also have a discontinuity between them [8].
 
 ### 3. Useful resources
 [1] A great talk by Hila Chefer for attention-based method: [Hila Chefer - Transformer Explainability](https://www.youtube.com/watch?v=A1tqsEkSoLg)
@@ -255,9 +271,13 @@ For all input token $$i$$ and output token $$j$$ , we can calculate $$C_{i,j}$$ 
 
 [5] Goro Kobayashi, Tatsuki Kuribayashi, Sho Yokoi, Kentaro Inui. 2020. Attention is Not Only a Weight: Analyzing Transformers with Vector Norms. Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing, pages 7057–7075, 
 
-[6] [pytorch-grad-cam/vision_transformers.md at master · jacobgil/pytorch-grad-cam · GitHub](https://github.com/jacobgil/pytorch-grad-cam/blob/master/tutorials/vision_transformers.md)
+[6] Adrien Bibal, Rémi Cardon, David Alfter, Rodrigo Wilkens, Xiaoou Wang, Thomas François∗ and Patrick Watrin. 2022. Is Attention Explanation? An Introduction to the Debate. Proceedings of the 60th Annual Meeting of the Association for Computational Linguistics Volume 1: Long Papers, pages 3889 - 3900.
 
-[7] Weiyan Xie, Xiao-Hui Li, Caleb Chen Cao, and Nevin L. Zhang. 2022. ViT-CX: Causal Explanation of Vision Transformers.
+[7] Goro Kobayashi, Tatsuki Kuribayashi, Sho Yokoi, Kentaro Inui. 2021. Incorporating Residual and Normalization Layers into Analysis of Masked Language Models. Proceedings of the 2021 Conference on Empirical Methods in Natural Language Processing, pages 4547–4568.
 
-[8] Hosein Mohebbi, Willem Zuidema, Grzegorz Chrupała, and Afra Alishahi. 2023. Quantifying Context Mixing in Transformers.
+[8] [pytorch-grad-cam/vision_transformers.md at master · jacobgil/pytorch-grad-cam · GitHub](https://github.com/jacobgil/pytorch-grad-cam/blob/master/tutorials/vision_transformers.md)
+
+[9] Weiyan Xie, Xiao-Hui Li, Caleb Chen Cao, and Nevin L. Zhang. 2022. ViT-CX: Causal Explanation of Vision Transformers.
+
+[10] Hosein Mohebbi, Willem Zuidema, Grzegorz Chrupała, and Afra Alishahi. 2023. Quantifying Context Mixing in Transformers.
 
