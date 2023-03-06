@@ -275,7 +275,7 @@ The second term is a spatial regularization term (to make the result smoother). 
 
 [7] Goro Kobayashi, Tatsuki Kuribayashi, Sho Yokoi, Kentaro Inui. 2021. Incorporating Residual and Normalization Layers into Analysis of Masked Language Models. Proceedings of the 2021 Conference on Empirical Methods in Natural Language Processing, pages 4547–4568.
 
-[8] [pytorch-grad-cam/vision_transformers.md at master · jacobgil/pytorch-grad-cam · GitHub](https://github.com/jacobgil/pytorch-grad-cam/blob/master/tutorials/vision_transformers.md)
+[8] Jacob Gildenblat. [pytorch-grad-cam/vision_transformers.md at master · jacobgil/pytorch-grad-cam · GitHub](https://github.com/jacobgil/pytorch-grad-cam/blob/master/tutorials/vision_transformers.md)
 
 [9] Weiyan Xie, Xiao-Hui Li, Caleb Chen Cao, and Nevin L. Zhang. 2022. ViT-CX: Causal Explanation of Vision Transformers.
 
