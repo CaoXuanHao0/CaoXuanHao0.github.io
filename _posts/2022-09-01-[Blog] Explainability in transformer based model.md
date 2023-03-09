@@ -4,9 +4,10 @@ layout: post
 mathjax: true
 ---
 
-In this article, we focus on explaining Transformer model's behavior, i.e., on which input features the Transformer model uses to make output (classification) decisions. 
+In many applications, we not only need the classification result from Transformer, but also need to explain the model's behavior: how Transformer makes decisions, which input features the Transformer model uses to make output (classification) decisions, or the contribution of input features to Transformer output. This requires us to explore Explainability in Transformer.
+ 
+So in this blog, we'll focus on explaining Transformer model's behavior. We first discuss the most popular method -- the Attention-based method, which is applicable to both Vision and Language models. And then we'll talk about some special methods for explaining the Vision model (Vision Transformer ) -- applying the explanation method in CNN to Transformer.
 
-We first discuss the most popular method -- Attention-based method, including Raw Attention, Attenion Rollout and its variant, and then talk about applying the explanation method in CNN to Transformer.
 
 ### 1. Attention-based method
 #### 1.1 Raw attention
@@ -28,7 +29,7 @@ Since we focus on classification models, only the [CLS] token, which encapsulate
 ![图片](/assets/blog1/image2.png)
 
 
-Typically people use the last layer's attention matrix (yields better results). It's a vector of 1\*197 dim. To visualize it like an image, we can first discard the first element (it's the importance of [CLS] token to [CLS] token; not so important) to get a 1\*196 dim vector, and then reshape it into a 14\*14 matrix to get a token level explanation. But we care about pixel-level explanation, so what we typically do is use bilinear interpolation to upsample it into a 224\*224 image (Same size as the input image. Here we use the ImageNet dataset's image as an example).
+Typically people use the last layer's attention matrix (yields better results). It's a vector of 1\*197 dim. And we discard the first element (it's the importance of [CLS] token to [CLS] token; not so important) to get a 1\*196 dim vector. For vision model, to visualize it like an image, we can first reshape it into a 14\*14 matrix to get a token level explanation. But we care about pixel-level explanation, so what we typically do is use bilinear interpolation to upsample it into a 224\*224 image (Same size as the input image. Here we use the ImageNet dataset's image as an example).
 
 Here's what we get:
 
@@ -94,14 +95,14 @@ This is bc we model the attribution of token $$i$$ at block $$b$$ to token $$j$$
 
 #### 1.3 Generic Attention Explainability (GAE) and Transformer Interpretability Beyond Attention Visualization [2,3]
 
-To improve, propose a few changes: 
+To make the assumptions of (1) and (2) more realistic, [2,3] propose a few improvement: 
 
 **(1)****Head aggregation****by weighted sum**
 
 * Here we use the gradient of the attention matrix as its weight and use weighted sum as the Head aggregation
 Since each head captures different features, and thus has different importance, and needs to be treated differently. So we use a gradient to weigh it.
 
-(Other choices of aggregation, like taking the minimum, or taking the maximum, are less effective as a gradient. It also enables a class-specific signal. )
+(It also enables a class-specific signal. Other choices of aggregation, like taking the minimum, or taking the maximum, are less effective as a gradient.)
 
 $$E_h A^{(b)} = \frac{1}{M} \sum_{m}^{} ∇A_m^{(b)} \odot A_m^{(b)}$$
 
@@ -113,7 +114,7 @@ $$E_h A^{(b)} = \frac{1}{M} \sum_{m}^{} ∇A_m^{(b)}\odot A_m^{(b)+}$$
 Same as before.
 
 
-Note that in author use relevance score R (calculated from LRP) to replace raw attention matrix A, but later in they find out that it's not so helpful, so they use attention matrix A again.
+Note that in [2] authors use relevance score R (calculated from LRP) to replace raw attention matrix A, but later in [3] they find out that it's not so helpful, so they use attention matrix A again.
 
 Code:
 
@@ -136,7 +137,9 @@ with torch.no_grad():
 
 #### 1.4 Aggregation methods as hyperparameters
 
-But the results of GAE are not necessarily the best. [4] Propose that the **ways of aggregating heads, layers:** 
+Previously we talk about many ways to aggregate attention matrix. But the results of GAE are not necessarily the best. For example, Sometimes it's better to aggregate attention matrix from the last layer to 4 th layer is better than to the first layer, but sometimes it's worse. So [4] Propose that the ways of aggregation can be hyperparameters:
+
+ways of aggregating over heads, layers: 
 
 * average, 
 * weighted by gradient, or 
@@ -146,21 +149,22 @@ and ways of extracting rows from the attention matrix:
 * select the row that the corresponding [CLS] token,
 * average over all columns,
 * max over columns  
-and even the number of layers is a hyperparameter. 
 
 ![图片](/assets/blog1/image6.png)
 
 
-And we should use the one that yields the best evaluation results.
+And for each hyperparameter, we evaluate its result, and choose the one that yields the best evaluation results.
+
+But it's computationally cost to search over those hyperparamters (because we have to evaluate it many times), so people still prefer using GAE as default.
 
 #### 1.5 Norm-based method [5]
 
-Argue that although some tokens might have large attention weights $$\alpha_{ij}$$, their value vector $$f(x_j)$$ is actually very small, so overall it has a small contribution. 
+[5] Observe that although some tokens might have large attention weights $$\alpha_{ij}$$, their value vector $$f(x_j)$$ is actually very small, so overall it has a small contribution. 
 
 ![图片](/assets/blog1/image7.png)
 
 
-So instead of using attention weights $$\alpha_{ij}$$ as attribution of token $$j$$ to token $$i$$ , propose to use the norm $$\|\|\alpha_{ij}f(x_j)\|\|$$ .
+So instead of using attention weights $$\alpha_{ij}$$ as attribution of token $$j$$ to token $$i$$ , they propose to use the norm $$\|\|\alpha_{ij}f(x_j)\|\|$$ . And then we can aggregate over heads and layers as we did in 1.3.
 
 #### 1.6 Limitation 
 
@@ -169,22 +173,26 @@ So instead of using attention weights $$\alpha_{ij}$$ as attribution of token $$
 * ignore FFN and negative components in each attention block.
 * ignore non-linearity in self-attention.
 
-(2) There's a debate about whether attention is a faithful explanation. Some of their observations are: attention attribution is not correlated well with other explanation methods' result, and randomly perturbing attention does not affect model's prediction [6].
+(2) Ongoing debate about attention as a faithful explanation.
+There's a debate about whether attention is a faithful explanation. Some of their observations are: attention attribution is not correlated well with other explanation methods' results, and randomly perturbing attention does not affect the model's prediction, which all indicates attention is not a faithful explanation [6].
+But [7] provides a possible answer of why discarding learned attention patterns has a low impact: most parts of token information are preserved by residual connection：
 
-But [7] provides a possible answer of why discarding learned attention patterns has low impact: most info are preserved by residual connection, so only perturbing attention does not change too much.
+![图片](/assets/blog1/image12.png)
+
+(This is the visualization of the attention map before (left) and after (right) adding residual connection . The right one is diagonal, which means the tokens itself has the highest contribution to themselves)
+So only perturbing attention does not change too much, if they don't change residual connection.
 
 ### 2. Applying explanation methods of CNN to Transformer
 Previously we talked about the Attention-based method, which is uniquely designed for Transformers because it uses a unique element of the attention map.
 
-But before Transformer was proposed, there were already many explainability methods for CNN, including gradient-based, CAM-based (feature-based), and perturbation-based methods. All of them can be modified and applied to explain the Transformer model.
+But before Vision Transformer (ViT) was proposed, there were already many explainability methods for CNN, including gradient-based, CAM-based (feature-based), and perturbation-based methods. All of them can be modified and applied to explain the Transformer model.
 
 #### 2.1 Gradient-based method
 
 We can use Input gradient, Smoothgrad, and Integrated Gradient in the exact same way as we use in CNN.
 
-But similar to CNN's explanation, we also get a very noisy visualizing result. 
-
-And I also observe a strong **checkboard artifact** from visualizing result:
+Similar to CNN's explanation, we also get a very noisy visualizing result. 
+And for ViT, I also observe a strong checkboard artifact (discontinuity between neighboring patches) from visualizing result:
 
 ![图片](/assets/blog1/image8.png)
 
