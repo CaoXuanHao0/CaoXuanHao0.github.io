@@ -97,7 +97,7 @@ This is bc we model the attribution of token $$i$$ at block $$b$$ to token $$j$$
 
 To make the assumptions of (1) and (2) more realistic, [2,3] propose a few improvement: 
 
-**(1)**\**Head aggregation***\*by weighted sum**
+* **(1)** **Head aggregation by weighted sum**
 [4] Observe that different heads attend to different objects or parts:
 
 ![图片](/assets/blog1/image13.png)
