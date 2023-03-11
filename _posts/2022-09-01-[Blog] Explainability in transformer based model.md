@@ -109,9 +109,9 @@ As each head attends to different information, each head should have different i
 
 So to explain a specific class, we should weigh the heads and these weights should be related to the class. This motivates us to choose gradient as weight:
 
-$$E_h A^{(b)} = \frac{1}{M} \sum_{m}^{} ∇A^{(b)}_m\odot A^{(b)}_m$$
+$$E_h A^{(b)} = \frac{1}{M} \sum_{m}^{} ∇A_m^{(b)}\odot A_m^{(b)}$$
 
-where$$ \ ∇A_m^{(b)} = \frac{\partial y_c}{\partial A_m^{(b)}}$$, and c is the class we want to explain to.
+, where $$ \ ∇A_m^{(b)} = \frac{\partial y_c}{\partial A_m^{(b)}}$$, and c is the class we want to explain to.
 
 (Other choices of aggregation, like taking the minimum, or taking the maximum, don't enable a class-specific signal.)
 
