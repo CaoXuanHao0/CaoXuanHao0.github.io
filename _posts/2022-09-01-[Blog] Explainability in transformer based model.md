@@ -144,7 +144,7 @@ with torch.no_grad():
 
 #### 1.4 Aggregation methods as hyperparameters
 
-Previously we talk about many ways to aggregate attention matrix. But the results of GAE are not necessarily the best. For example, Sometimes it's better to aggregate attention matrix from the last layer to 4 th layer is better than to the first layer, but sometimes it's worse. So [4] Propose that the ways of aggregation can be hyperparameters:
+Previously we talk about many ways to aggregate attention matrix. But the results of GAE are not necessarily the best. For example, Sometimes it's better to aggregate attention matrix from the last layer to 4 th layer is better than to the first layer, but sometimes it's worse. So [5] Propose that the ways of aggregation can be hyperparameters:
 
 ways of aggregating over heads, layers: 
 
@@ -164,7 +164,7 @@ And for each hyperparameter, we evaluate its result, and choose the one that yie
 
 But it's computationally cost to search over those hyperparamters (because we have to evaluate it many times), so people still prefer using GAE as default.
 
-#### 1.5 Norm-based method [5]
+#### 1.5 Norm-based method [6]
 
 [5] Observe that although some tokens might have large attention weights $$\alpha_{ij}$$, their value vector $$f(x_j)$$ is actually very small, so overall it has a small contribution. 
 
@@ -181,8 +181,8 @@ So instead of using attention weights $$\alpha_{ij}$$ as attribution of token $$
 * ignore non-linearity in self-attention.
 
 (2) Ongoing debate about attention as a faithful explanation.
-There's a debate about whether attention is a faithful explanation. Some of their observations are: attention attribution is not correlated well with other explanation methods' results, and randomly perturbing attention does not affect the model's prediction, which all indicates attention is not a faithful explanation [6].
-But [7] provides a possible answer of why discarding learned attention patterns has a low impact: most parts of token information are preserved by residual connection：
+There's a debate about whether attention is a faithful explanation. Some of their observations are: attention attribution is not correlated well with other explanation methods' results, and randomly perturbing attention does not affect the model's prediction, which all indicates attention is not a faithful explanation [7].
+But [8] provides a possible answer of why discarding learned attention patterns has a low impact: most parts of token information are preserved by residual connection：
 
 ![图片](/assets/blog1/image12.png)
 
@@ -212,7 +212,7 @@ For more about strided convolutions causing checkboard artifact, see: [https://d
 
 **（1）Grad-CAM**
 
-We can extract feature maps as follows [8]:
+We can extract feature maps as follows [9]:
 
 >In ViT the output of the layers is typically BATCH x 197 x 192. At dimension 197, the first element represents the class token, and the rest represents the 14x14 patches in the image. We can treat the last 196 elements as a 14x14 spatial image, with 192 channels.
 >Since the final classification is done on the class token computed in the last attention block, the output will not be affected by the 14x14 channels in the last layer. The gradient of the output with respect to them will be 0!
@@ -224,7 +224,7 @@ target_layers = [model.blocks[-1].norm1]
 And Gradients can be calculated easily using backprop. We use gradient as weights of features, and then Combine those two terms, we get **Grad-CAM**.
 
 
-**(2) ViT-CX [9]**
+**(2) ViT-CX [10]**
 
 We first extract feature maps as above.
 
@@ -240,7 +240,7 @@ The intuition is, if the feature map highlights the important region of the inpu
 
 #### 2.3 Perturbation-based method
 
-(1) Value Zeroing [10]
+(1) Value Zeroing [11]
 
 Perturbation-based method aims to measure how much a token uses other context tokens to build its output representation $$\tilde{x}_ i$$ at each encoder layer by perturbing input token.
 
@@ -282,17 +282,20 @@ The second term is a spatial regularization term (to make the result smoother). 
 
 [3] Hila Chefer, Shir Gur, and Lior Wolf. 2021. Transformer Interpretability Beyond Attention Visualization.
 
-[4] Nikolaos Mylonas, Ioannis Mollas, and Grigorios Tsoumakas. 2022. AN ATTENTION MATRIX FOR EVERY DECISION: FAITHFULNESS-BASED ARBITRATION AMONG MULTIPLE ATTENTION-BASED INTERPRETATIONS OF TRANSFORMERS IN TEXT CLASSIFICATION.
+[4] Mathilde Caron, Hugo Touvron, Ishan Misra, Herve Jegou, Julien Mairal, Piotr Bojanowski, Armand Joulin. 2021. Emerging Properties in Self-Supervised Vision Transformers.
 
-[5] Goro Kobayashi, Tatsuki Kuribayashi, Sho Yokoi, Kentaro Inui. 2020. Attention is Not Only a Weight: Analyzing Transformers with Vector Norms. Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing, pages 7057–7075, 
+[5] Nikolaos Mylonas, Ioannis Mollas, and Grigorios Tsoumakas. 2022. AN ATTENTION MATRIX FOR EVERY DECISION: FAITHFULNESS-BASED ARBITRATION AMONG MULTIPLE ATTENTION-BASED INTERPRETATIONS OF TRANSFORMERS IN TEXT CLASSIFICATION.
 
-[6] Adrien Bibal, Rémi Cardon, David Alfter, Rodrigo Wilkens, Xiaoou Wang, Thomas François∗ and Patrick Watrin. 2022. Is Attention Explanation? An Introduction to the Debate. Proceedings of the 60th Annual Meeting of the Association for Computational Linguistics Volume 1: Long Papers, pages 3889 - 3900.
+[6] Goro Kobayashi, Tatsuki Kuribayashi, Sho Yokoi, Kentaro Inui. 2020. Attention is Not Only a Weight: Analyzing Transformers with Vector Norms. Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing, pages 7057–7075.
 
-[7] Goro Kobayashi, Tatsuki Kuribayashi, Sho Yokoi, Kentaro Inui. 2021. Incorporating Residual and Normalization Layers into Analysis of Masked Language Models. Proceedings of the 2021 Conference on Empirical Methods in Natural Language Processing, pages 4547–4568.
+[7] Adrien Bibal, Rémi Cardon, David Alfter, Rodrigo Wilkens, Xiaoou Wang, Thomas François∗ and Patrick Watrin. 2022. Is Attention Explanation? An Introduction to the Debate. Proceedings of the 60th Annual Meeting of the Association for Computational Linguistics Volume 1: Long Papers, pages 3889 - 3900.
 
-[8] Jacob Gildenblat. [pytorch-grad-cam/vision_transformers.md at master · jacobgil/pytorch-grad-cam · GitHub](https://github.com/jacobgil/pytorch-grad-cam/blob/master/tutorials/vision_transformers.md)
+[8] Goro Kobayashi, Tatsuki Kuribayashi, Sho Yokoi, Kentaro Inui. 2021. Incorporating Residual and Normalization Layers into Analysis of Masked Language Models. Proceedings of the 2021 Conference on Empirical Methods in Natural Language Processing, pages 4547–4568.
 
-[9] Weiyan Xie, Xiao-Hui Li, Caleb Chen Cao, and Nevin L. Zhang. 2022. ViT-CX: Causal Explanation of Vision Transformers.
+[9] Jacob Gildenblat. [pytorch-grad-cam/vision_transformers.md at master · jacobgil/pytorch-grad-cam · GitHub](https://github.com/jacobgil/pytorch-grad-cam/blob/master/tutorials/vision_transformers.md)
 
-[10] Hosein Mohebbi, Willem Zuidema, Grzegorz Chrupała, and Afra Alishahi. 2023. Quantifying Context Mixing in Transformers.
+[10] Weiyan Xie, Xiao-Hui Li, Caleb Chen Cao, and Nevin L. Zhang. 2022. ViT-CX: Causal Explanation of Vision Transformers.
+
+[11] Hosein Mohebbi, Willem Zuidema, Grzegorz Chrupała, and Afra Alishahi. 2023. Quantifying Context Mixing in Transformers.
+
 
