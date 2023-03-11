@@ -97,18 +97,25 @@ This is bc we model the attribution of token $$i$$ at block $$b$$ to token $$j$$
 
 To make the assumptions of (1) and (2) more realistic, [2,3] propose a few improvement: 
 
-**(1)****Head aggregation****by weighted sum**
+**(1)**\**Head aggregation***\*by weighted sum**
+[4] Observe that different heads attend to different objects or parts:
 
-* Here we use the gradient of the attention matrix as its weight and use weighted sum as the Head aggregation
-Since each head captures different features, and thus has different importance, and needs to be treated differently. So we use a gradient to weigh it.
+![图片](/assets/blog1/image13.png)
+picture: Visualization of attention map of each head with different color
 
-(It also enables a class-specific signal. Other choices of aggregation, like taking the minimum, or taking the maximum, are less effective as a gradient.)
+As each head attends to different information, each head should have different importance for different output class predictions. For example, in the plot above, if we want to explain which part of an input image is used by the model to predict class "carrot", then we want only the blue part to be highlighted, so the attention matrix that corresponds to the blue part should have highest weight. And if we average them like what we did in Attention Rollout, we might get a saliency map highlighting all objects rather than the object we want to explain to.
 
-$$E_h A^{(b)} = \frac{1}{M} \sum_{m}^{} ∇A_m^{(b)} \odot A_m^{(b)}$$
+So to explain a specific class, we should weigh the heads and these weights should be related to the class. This motivates us to choose gradient as weight:
 
-And in order to compute the weighted attention relevance, we consider only the positive values of the gradients-relevance multiplication, resembling positive relevance.
+$$E_h A^{(b)} = \frac{1}{M} \sum_{m}^{} ∇A^{(b)}_m\odot A^{(b)}_m$$
 
-$$E_h A^{(b)} = \frac{1}{M} \sum_{m}^{} ∇A_m^{(b)}\odot A_m^{(b)+}$$
+where$$ \ ∇A^{(b)}_m = \frac{\partial y_c}{\partial A^{(b)}_m}$$, and c is the class we want to explain to.
+
+(Other choices of aggregation, like taking the minimum, or taking the maximum, don't enable a class-specific signal.)
+
+Besides, since we only care about which part is used to make a dicision, the positive contribution is considered. So we can discard the negative part in the attention matrix:
+
+$$E_h A^{(b)} = \frac{1}{M} \sum_{m}^{} ∇A_m^{(b)} \odot A^{(b)+}_m$$
 
 * **(2) Layer (Block) aggregation by (attention) matrix multiplication**
 Same as before.
