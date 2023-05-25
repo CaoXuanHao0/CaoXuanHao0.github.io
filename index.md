@@ -4,8 +4,8 @@ title: "Home"
 ---
 
 Hello, welcome to my personal webpage!  
-I'm **Xuanhao Cao (曹轩豪)**, a master student of Machine Learning @ University of Tuebingen.  
-My research interest lies in **Explainable AI**, especially for the current popular transformer based model.  
+I'm **Xuanhao Cao (曹轩豪)**, a master student of Machine Learning at the University of Tuebingen.  
+My research interest lies in **Autonomous Driving**, **AIGC**, and **Explainable AI**.  
 And I'm also very enthusiastic about the latest advance of ML!  
 
 <br/>
@@ -26,18 +26,27 @@ Math | Bachelor second degree
 <br/>
 
 ### **RESEARCH EXPERIENCE**
+**Autonomous Vision Seminar，    2023.04 - Present**
+University of Tübingen, Prof. Andreas Geiger
+* End-to-end motion prediction for autonomous driving (joint perception and prediction).
+
+**Large-scale Generative Models Seminar,    2023.05 - Present**
+Bosch Industry-on-Campus Lab (Dan Zhang and Anna Khoreva)    
+* Diffusion model + Image editing.
+
 **Research Intern / Research Project，    2022.04 - Present**
-* University of Tuebingen, Prof. Zeynep Akata's group     
-Explanation for vision model (CNNs and ViT). \
-Feature alignment in ViT.
+University of Tuebingen, Prof. Zeynep Akata      
+* Explanation for vision model (CNNs and ViT). 
+* Feature alignment in ViT. 
+* Multi-modal learning (CLIP)
 
 **Research assistant，    2020.09 - 2021.05**
-* Beihang University, Lecturer Hao Peng's group    
-Run experiments, implement models for paper / project in the field of Federated Learning, Reinforcement Learning, and Graph Neural Network.
+Beihang University, Lecturer Hao Peng's group    
+* Federated Learning, Reinforcement Learning, and Graph Neural Network:  paper reading, assistance with experiments.
 
 **Research assistant，     2020.03 - 2021.07**
-* Beihang University, Lecturer Chu Zhang's group <br/>
-Do survey on current development of big data distributed platform architecture.
+Beihang University, Lecturer Chu Zhang's group <br/>
+* Survey on current development of big data distributed platform architecture.
 
 <br/>
 
