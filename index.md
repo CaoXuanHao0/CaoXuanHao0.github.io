@@ -7,6 +7,7 @@ Hello, welcome to my personal webpage!
 I'm **Xuanhao Cao (曹轩豪)**, a master student of Machine Learning at the University of Tuebingen.  
 My research interest lies in **Autonomous Driving**, **AIGC**, and **Explainable AI**.  
 And I'm also very enthusiastic about the latest advance of ML!  
+Currently I'm looking for an internship from August to November 2023. If you have any vacancy, feel free to contact me :)
 
 <br/>
 <hr/>
@@ -30,6 +31,8 @@ Math | Bachelor second degree
 
 University of Tübingen, Prof. Andreas Geiger
 * End-to-end motion prediction for autonomous driving (joint perception and prediction).
+For my report on this topic, see [here](https://drive.google.com/drive/folders/1K-JNJF6FgVsd3EubLFi3wqdkptTT-ivh?usp=sharing) (still working on it).
+
 
 **Large-scale Generative Models Seminar,    2023.05 - Present**
 
