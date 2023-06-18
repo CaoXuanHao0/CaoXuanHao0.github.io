@@ -7,17 +7,17 @@ mathjax: true
 # Recap: What is End-to-End Motion Prediction
 Traditionally the whole working pipeline of autonomous driving is modular pipeline:
 
-![图片](/assets/blog2/modular_pipeline.png)
+![图片](/assets/blog2/modular_pipeline.jpg)
 
 But it suffers from some drawbacks, like pice-wise training. So the recent trend is developing in an end-to-end fashion, which jointly develops perception and prediction modules:
 
-![图片](/assets/blog2/e2e_motion_pred.png)
+![图片](/assets/blog2/e2e_motion_pred.jpg)
 
 It has two key advantages: (1) shared computation and (2) shared information between modules.
 
 The working pipeline of end-to-end motion prediction is as follows:
 
-![图片](/assets/blog2/our_pipeline.png)
+![图片](/assets/blog2/our_pipeline.jpg)
 
 As you can see, there're three key components here, **perception model**, **conditional generative model**, and **decoder heads**. 
 
@@ -27,11 +27,15 @@ The perception model is pretty much similar to those models for perception-only 
 
 # Probabilistic prediction framework
 We can model the prediction mechanism as a conditional probability distribution $$ P (Y |S) = p(y_1, · · ·, y_{T'} |s_1, · · ·, s_T ) $$ that generates T' future state feature $$ Y = \{y_1, y_2, · · ·, y_{T'} \} $$ given past state features for each frame $$ S = \{s_1, s_2, · · ·, s_T \} $$ or a single state feature $$ S=s $$ that represent all past frames, which are extracted from sensor data or/and HD maps.
+Once we have an explicit form of this conditional probability distribution, we can sample future BEV features from it. 
 
-Once we have an explicit form of this conditional probability distribution, we can sample future BEV features from it. But unfortunately, it's intractable, so we have to add some assumptions to factorize it.
+![图片](/assets/blog2/gene.jpg)
+
+
+But unfortunately, it's intractable, so we have to add some assumptions to factorize it.
 Various factorizations of $$ P(Y | S) $$ utilize different levels of independence assumptions:
 
-![图片](/assets/blog2/prob_pred.png)
+![图片](/assets/blog2/prob_pred.jpg)
 
 **(a) Assume independent futures across time steps**, then we get:
 
@@ -52,7 +56,7 @@ $$ P (Y |S) = ∫ _Z P (Y |S, Z) P (Z|S) dZ $$
 But often modeling such probability is still intractable, so we still need to simplify it a little.
 If we use a deterministic mapping $$ Y = f (S, Z) $$ to implicitly characterize $$ P (Y |S, Z) $$ instead of explicitly representing it in a parametric form, we can avoid factorizing $$ P (Y |S, Z) $$. In this framework, generating scene-consistent future state $$ Y $$ (by sample $$Y$$ from $$ P(Y|S) $$) is simple and highly efficient since it only requires one stage of parallel sampling:
 
-  Step 1. Draw latent scene samples from prior $$ Z ∼ P (Z \|S) $$ (equivalent to the sample from a "future distribution" that we'll discuss later)
+  Step 1. Draw latent scene samples from prior $$ Z ∼ P (Z \|S) $$ (equivalent to the sample from a "future distribution [2]" that we'll discuss later)
   
   Step 2. Decode with the deterministic decoder $$ Y = f_{predict} (S, Z) \approx P (Y \|S, Z) $$.
   
@@ -87,10 +91,19 @@ During training: sample latent future from $$ P(Z|S,Y_{GT}) $$: $$ Z ∼ N (μ_{
 During inference: sample latent future from $$ P(Z|S) $$:  $$ Z ∼ N (μ_{t}, σ^2_{ t}) $$ (each sample corresponds to a different possible future).
 
 **Making Future Prediction**
+So the whole process can be simplified as follows:
+(1) Sample latent code $$ Z $$  from $$ P(Z|S) $$, and then (2) feed $$ Z $$ (encode probabilistic future information) and $$ S $$ (encode information of current and past frames) into decoder $$ f_{predict} $$ (usually an RNN), to generate future features $$ \{ y_{t+j} \} _ {j \in J} = f_{predict}(S, Z) $$ that (3) become the inputs of several individual heads to decode these features to downstream prediction task:
 
-Feed $$ Z $$ (encode probabilistic future information) and $$ S $$ (encode information of current and past frames) into decoder $ f_{predict} $(usually an RNN), to sequentially generate future features $$ \{ y_{t+j} \}_{j \in J} = f_{predict}(S,Z) $$ that become the inputs of several individual heads D to decode these features to downstream prediction task.
+![图片](/assets/blog2/prob_simple.jpg)
+
 
 # Reference
+
 [1] Implicit Latent Variable Model for Scene-Consistent Motion Forecasting.
+
 [2] Probabilistic Future Prediction for Video Scene Understanding.
+
+[3] 
+
+[4] 
 
