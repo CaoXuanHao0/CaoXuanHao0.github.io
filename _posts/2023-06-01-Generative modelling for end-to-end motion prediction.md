@@ -56,9 +56,9 @@ $$ P (Y |S) = ∫ _Z P (Y |S, Z) P (Z|S) dZ $$
 But often modeling such probability is still intractable, so we still need to simplify it a little.
 If we use a deterministic mapping $$ Y = f (S, Z) $$ to implicitly characterize $$ P (Y |S, Z) $$ instead of explicitly representing it in a parametric form, we can avoid factorizing $$ P (Y |S, Z) $$. In this framework, generating scene-consistent future state $$ Y $$ (by sample $$Y$$ from $$ P(Y|S) $$) is simple and highly efficient since it only requires one stage of parallel sampling:
 
-  Step 1. Draw latent scene samples from prior $$ Z ∼ P (Z | S) $$ (equivalent to the sample from a "future distribution [2]" that we'll discuss later)
+  Step 1. Draw latent scene samples from prior $$ Z ∼ P (Z \| S) $$ (equivalent to the sample from a "future distribution [2]" that we'll discuss later)
   
-  Step 2. Decode with the deterministic decoder $$ Y = f_{predict} (S, Z) \approx P (Y | S, Z) $$.
+  Step 2. Decode with the deterministic decoder $$ Y = f_{predict} (S, Z) \approx P (Y \| S, Z) $$.
   
 This is exactly the same as any other deterministic end-to-end motion prediction mechanism $$ Y=f_{predict}(X) $$, with an additional probabilistic element $$ Z $$ added, which captures all stochasticity in the generative process.
 
@@ -80,15 +80,17 @@ We parametrize both distributions as diagonal Gaussians with mean $$ μ \in R^L 
 * Concatenate output of all time steps, and feed them to another FC.
 * Output parametrisation of the present distribution: $$ (μ_{t,gt}, σ_{t,gt}) \in R^L × R^L $$.
 
-And then we learn by encouraging $ P(Z \| S) $to mach $ P(Z | S, Y_{GT}) $by optimizing the following loss (min the KL divergence between two distributions) (or equivalently, optimize ELBO):
+**Learning the future distribution**
+And then we learn by encouraging $$ P(Z \| S) $$ to mach $$ P(Z \| S, Y_{GT}) $$ by optimizing the following loss (min the KL divergence between two distributions) (or equivalently, optimize ELBO):
+
 $$\text{min} \ D_{KL}(P(S|Z) ||P(S \| Z,Y_{GT}) )$$
 
 
 **Probabilistic Future Prediction**
 
-During training: sample latent future from $$ P(Z | S,Y_{GT}) $$: $$ Z ∼ N (μ_{t,gt}, σ^2_{ t,gt}) $$, for all future frames prediction.
+During training: sample latent future from $$ P(Z \| S,Y_{GT}) $$: $$ Z ∼ N (μ_{t,gt}, σ^2_{ t,gt}) $$, for all future frames prediction.
 
-During inference: sample latent future from $$ P(Z | S) $$:  $$ Z ∼ N (μ_{t}, σ^2_{ t}) $$ (each sample corresponds to a different possible future).
+During inference: sample latent future from $$ P(Z \| S) $$:  $$ Z ∼ N (μ_{t}, σ^2_{ t}) $$ (each sample corresponds to a different possible future).
 
 **Making Future Prediction**
 So the whole process can be simplified as follows:
