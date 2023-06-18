@@ -81,9 +81,10 @@ We parametrize both distributions as diagonal Gaussians with mean $$ μ \in R^L 
 * Output parametrisation of the present distribution: $$ (μ_{t,gt}, σ_{t,gt}) \in R^L × R^L $$.
 
 **Learning the future distribution**
-And then we learn by encouraging $$ P(Z \| S) $$ to mach $$ P(Z \| S, Y_{GT}) $$ by optimizing the following loss (min the KL divergence between two distributions) (or equivalently, optimize ELBO):
 
-$$\text{min} \ D_{KL}(P(S|Z) ||P(S \| Z,Y_{GT}) )$$
+And then we learn by encouraging $$ P(Z \(|\) S) $$ to mach $$ P(Z \(|\) S, Y_{GT}) $$ by optimizing the following loss (min the KL divergence between two distributions) (or equivalently, optimize ELBO):
+
+$$\text{min} \ D_{KL}(P(S|Z) || P(S|Z,Y_{GT}) )$$
 
 
 **Probabilistic Future Prediction**
