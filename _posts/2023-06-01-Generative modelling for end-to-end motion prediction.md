@@ -82,14 +82,14 @@ We parametrize both distributions as diagonal Gaussians with mean $$ μ \in R^L 
 
 **Learning the future distribution**
 
-And then we learn by encouraging $$ P(Z \(|\) S) $$ to mach $$ P(Z \(|\) S, Y_{GT}) $$ by optimizing the following loss (min the KL divergence between two distributions) (or equivalently, optimize ELBO):
+And then we learn by encouraging $$ P(Z|S) $$ to mach $$ P(Z \(|\) S, Y_{GT}) $$ by optimizing the following loss (min the KL divergence between two distributions) (or equivalently, optimize ELBO):
 
 $$\text{min} \ D_{KL}(P(S|Z) || P(S|Z,Y_{GT}) )$$
 
 
 **Probabilistic Future Prediction**
 
-During training: sample latent future from $$ P(Z \| S,Y_{GT}) $$: $$ Z ∼ N (μ_{t,gt}, σ^2_{ t,gt}) $$, for all future frames prediction.
+During training: sample latent future from $$ P(Z|S,Y_{GT}) $$: $$ Z ∼ N (μ_{t,gt}, σ^2_{ t,gt}) $$, for all future frames prediction.
 
 During inference: sample latent future from $$ P(Z \| S) $$:  $$ Z ∼ N (μ_{t}, σ^2_{ t}) $$ (each sample corresponds to a different possible future).
 
