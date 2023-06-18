@@ -5,7 +5,7 @@ mathjax: true
 ---
 
 # Recap: What is End-to-End Motion Prediction
-Traditionally the whole working pipeline of autonomous driving is modular pipeline:
+Traditionally the whole working pipeline of autonomous driving is modular pipeline [4]:
 
 ![图片](/assets/blog2/modular_pipeline.jpg)
 
@@ -23,7 +23,7 @@ As you can see, there're three key components here, **perception model**, **cond
 
 First, we have a perception model that encodes information into *past BEV feature maps* from past sensor input, and then we have a conditional generative model that generates *future BEV feature map* conditions on past BEV feature map (which we will elaborate on next), and then several heads are employed to decode them into future motion prediction.
 
-The perception model is pretty much similar to those models for perception-only tasks like BEVFormer [], and actually, if you employ several decoder heads for the *past BEV feature maps*, you will get perception results, so I won't spend too much time talking about it. And the decoder heads are just usually detection heads, and segmentation heads, so we can directly use the existing model. The new thing here is the conditional generative model, which is borrowed from the prediction-only task but is modified a little. So in this blog I will focus on introducing the conditional generative model.
+The perception model is pretty much similar to those models for perception-only tasks like BEVFormer [3], and actually, if you employ several decoder heads for the *past BEV feature maps*, you will get perception results, so I won't spend too much time talking about it. And the decoder heads are just usually detection heads, and segmentation heads, so we can directly use the existing model. The new thing here is the conditional generative model, which is borrowed from the prediction-only task but is modified a little. So in this blog I will focus on introducing the conditional generative model.
 
 # Probabilistic prediction framework
 We can model the prediction mechanism as a conditional probability distribution $$ P (Y |S) = p(y_1, · · ·, y_{T'} |s_1, · · ·, s_T ) $$ that generates T' future state feature $$ Y = \{y_1, y_2, · · ·, y_{T'} \} $$ given past state features for each frame $$ S = \{s_1, s_2, · · ·, s_T \} $$ or a single state feature $$ S=s $$ that represent all past frames, which are extracted from sensor data or/and HD maps.
@@ -45,7 +45,7 @@ Various factorizations of $$ P(Y | S) $$ utilize different levels of independenc
 
  $$ P(Y |S) = \prod_{t}^{} P(y_t|Y^{0:t-1},S) $$
  
-The next trajectory depends on previous ones. We can model  $$ P(y_t \| Y^{0:t-1}, S) $$ as an RNN [] (then we're back to a deterministic model).
+The next trajectory depends on previous ones. We can model  $$ P(y_t \| Y^{0:t-1}, S) $$ as an RNN [5,6] (then we're back to a deterministic model).
 
 **(c) Assume there's a latent / hidden state that generates future trajectories [1]:**
 
@@ -103,7 +103,11 @@ So the whole process can be simplified as follows:
 
 [2] Probabilistic Future Prediction for Video Scene Understanding.
 
-[3] 
+[3] BEVFormer: Learning Bird's-Eye-View Representation from Multi-Camera Images via Spatiotemporal Transformers
 
-[4] 
+[4] Computer Vision for Autonomous Vehicles: Problems, Datasets and State-of-the-Art.
+
+[5] FIERY: Future Instance Prediction in Bird’s-Eye View from Surround Monocular Cameras.
+
+[6] BEVerse: Unified Perception and Prediction in Birds-Eye-View for Vision-Centric Autonomous Driving.
 
