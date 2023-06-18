@@ -4,24 +4,23 @@ title: "Home"
 ---
 
 Hello, welcome to my personal webpage!  
-I'm **Xuanhao Cao (曹轩豪)**, a master student of Machine Learning at the University of Tuebingen.  
-My research interest lies in **Autonomous Driving**, **AIGC**, and **Explainable AI**.  
-And I'm also very enthusiastic about the latest advance of ML!  
-Currently I'm looking for an internship from August to November 2023. If you have any vacancy, feel free to contact me :)
+I'm **Xuanhao Cao (曹轩豪)**, a master's student of Machine Learning at the University of Tuebingen.  
+My research interest lies in **Autonomous Driving**, **AIGC**, and **Explainable AI**.  And I'm also very enthusiastic about the latest advance in ML!  
+Currently I'm looking for an internship from August to November 2023. If you have any vacancies, feel free to contact me :)
 
 <br/>
 <hr/>
 
 ### **EDUCATION**
 **University of Tuebingen，      2021.10 - Present**    
-Machine learinig | Master | Department of Computer Science 
+Machine Learning | Master | Department of Computer Science 
 
 **Beihang University，      2017.09 - 2021.06**    
 Information System and Information Management | Bachelor
 
 
 **Beihang University，      2018.09 - 2021.06**    
-Math | Bachelor second degree
+Math | Bachelor's second degree
 
 
 <br/>
@@ -46,7 +45,7 @@ University of Tuebingen, Prof. Zeynep Akata
 * Feature alignment in ViT. 
 * Multi-modal learning (CLIP)
 
-**Research assistant，    2020.09 - 2021.05**
+**Research Assistant，    2020.09 - 2021.05**
 
 Beihang University, Lecturer Hao Peng's group    
 * Federated Learning, Reinforcement Learning, and Graph Neural Network:  paper reading, assistance with experiments.
