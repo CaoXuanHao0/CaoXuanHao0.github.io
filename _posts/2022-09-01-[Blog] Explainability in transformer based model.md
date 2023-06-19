@@ -22,9 +22,9 @@ More specificly, the output $$y_i$$ of token $$i$$ is computed as a weighted sum
 
 $$y_i = \sum_{j}^{}{\alpha_{i,j} v_j}$$
 
-So intuitively, we can use these weights$$\alpha_{ij}$$from attention matrix$$A$$ to quantify how important is the input tokens to output tokens, where each row corresponds to a relevance map for each token given the other tokens.
+So intuitively, we can use these weights $$\alpha_{ij}$$ from attention matrix $$A$$ to quantify how important is the input tokens to output tokens, where each row corresponds to a relevance map for each token given the other tokens.
 
-Since we focus on classification models, only the [CLS] token, which encapsulates the explanation of the classification, is considered. The relevance map is, therefore, derived from the row  $$C_{[CLS]} ∈ R_s$$ that corresponds to the [CLS] token. This row contains a score evaluating each token's influence on the classification token：
+Since we focus on classification models, only the [CLS] token, which encapsulates the explanation of the classification, is considered. The relevance map is, therefore, derived from the row  $$C_{[CLS]} \in R_s$$ that corresponds to the [CLS] token. This row contains a score evaluating each token's influence on the classification token：
 
 ![图片](/assets/blog1/image2.png)
 
@@ -59,7 +59,7 @@ But how? One direction is exploiting more information from Transformer model. We
 * **(1) Many attention heads**
 Many heads are useless -- if we prune most of the heads, then the performance will not be affected...
 
-So we can not treat these heads as equal when calculating saliency map.
+So we can not treat these heads as equal when calculating the saliency map.
 
 * **(2) Many attention layers** 
 Attentions are combining non-linearly from one layer to the next. 
