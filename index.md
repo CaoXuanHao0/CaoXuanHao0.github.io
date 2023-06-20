@@ -12,8 +12,10 @@ Currently I'm looking for an internship from August to November 2023. If you hav
 <hr/>
 
 ### **EDUCATION**
-**University of Tuebingen，      2021.10 - Present**    
+**University of Tuebingen，      2021.10 - Present (probably 2024.03)**    
 Machine Learning | Master | Department of Computer Science 
+
+[My transcript](https://drive.google.com/file/d/1itEO9-OsGxaYeD6jyT55OqULXkOcTDdp/view?usp=sharing)
 
 **Beihang University，      2017.09 - 2021.06**    
 Information System and Information Management | Bachelor
@@ -36,14 +38,14 @@ For my report on this topic, see [here](https://drive.google.com/drive/folders/1
 **Large-scale Generative Models Seminar,    2023.05 - Present**
 
 Bosch Industry-on-Campus Lab (Dan Zhang and Anna Khoreva)    
-* Diffusion model + [Prompt-to-Prompt Image editing](https://docs.google.com/presentation/d/1-j_dE3Og7OClpf0pAwmHORmj11uSdajTN-UIZsjEFpg/edit?usp=sharing).
+* Diffusion model + [Prompt-to-Prompt Image editing](https://drive.google.com/drive/folders/1fzzvJc_NLh_815zi6sPWqF87SZJbUtIB?usp=sharing).
 
 **Research Intern / Research Project，    2022.04 - 2023.05**
 
 University of Tuebingen, Prof. Zeynep Akata      
 * Explanability for deep learning model (CNNs and Transformer). 
 * Feature alignment in Transformer. 
-* Multi-modal learning: [Closing the Modality gap in CLIP's embedding space](https://docs.google.com/presentation/d/10KtHeD_nLuiQSic3nBkwF0v91-iqqM1W7fD0z82ckyA/edit?usp=sharing).
+* Multi-modal learning: [Closing the Modality gap in CLIP's embedding space](https://drive.google.com/drive/folders/1FuC75xdNdOJNAXL1pXv5WpZLyI17FsiK?usp=sharing).
 
 **Research Assistant，    2020.09 - 2021.05**
 
