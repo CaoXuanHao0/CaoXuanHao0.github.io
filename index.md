@@ -36,14 +36,14 @@ For my report on this topic, see [here](https://drive.google.com/drive/folders/1
 **Large-scale Generative Models Seminar,    2023.05 - Present**
 
 Bosch Industry-on-Campus Lab (Dan Zhang and Anna Khoreva)    
-* Diffusion model + Prompt-to-Prompt Image editing.
+* Diffusion model + [Prompt-to-Prompt Image editing](https://docs.google.com/presentation/d/1-j_dE3Og7OClpf0pAwmHORmj11uSdajTN-UIZsjEFpg/edit?usp=sharing).
 
 **Research Intern / Research Project，    2022.04 - 2023.05**
 
 University of Tuebingen, Prof. Zeynep Akata      
-* Explanation for vision model (CNNs and ViT). 
-* Feature alignment in Vision Transformer. 
-* Multi-modal learning (Improving CLIP)
+* Explanability for deep learning model (CNNs and Transformer). 
+* Feature alignment in Transformer. 
+* Multi-modal learning: [Closing the Modality gap in CLIP's embedding space](https://docs.google.com/presentation/d/10KtHeD_nLuiQSic3nBkwF0v91-iqqM1W7fD0z82ckyA/edit?usp=sharing).
 
 **Research Assistant，    2020.09 - 2021.05**
 
