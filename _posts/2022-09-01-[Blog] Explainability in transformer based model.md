@@ -1,12 +1,12 @@
 ---
-title: "Explainability in transformer based model"
+title: "Explainability for Transformer-based model"
 layout: post
 mathjax: true
 ---
 
-In many applications, we not only need the classification result from Transformer, but also need to explain the model's behavior: how Transformer makes decisions, which input features the Transformer model uses to make output (classification) decisions, or the contribution of input features to Transformer output. This requires us to explore Explainability in Transformer.
+In many applications, we not only need the classification result from Transformer, but also need to explain the model's behavior: how the Transformer makes decisions, which input features the Transformer model uses to make output (classification) decisions, or the contribution of input features to Transformer output. This requires us to explore Explainability in Transformer.
  
-So in this blog, we'll focus on explaining Transformer model's behavior. We first discuss the most popular method -- the Attention-based method, which is applicable to both Vision and Language models. And then we'll talk about some special methods for explaining the Vision model (Vision Transformer ) -- applying the explanation method in CNN to Transformer.
+So in this blog, we'll focus on explaining the Transformer model's behavior. We first discuss the most popular method -- the Attention-based method, which is applicable to both Vision and Language models. And then we'll talk about some special methods for explaining the Vision model (Vision Transformer ) -- applying the explanation method in CNN to Transformer.
 
 
 ### 1. Attention-based method
@@ -18,7 +18,7 @@ $$A=softmax(\frac{Q·K^T}{\sqrt{d_h}})$$
 
 $$O=A·V$$
 
-More specificly, the output $$y_i$$ of token $$i$$ is computed as a weighted sum of all input tokens, where the weights $$\alpha_{ij}$$ are given by the attention matrix $$A$$ :
+More specifically, the output $$y_i$$ of a token $$i$$ is computed as a weighted sum of all input tokens, where the weights $$\alpha_{ij}$$ are given by the attention matrix $$A$$ :
 
 $$y_i = \sum_{j}^{}{\alpha_{i,j} v_j}$$
 
@@ -41,7 +41,7 @@ Code:
 ```python
 # Look at the total attention between the class token, and the image patches
 mask = A[0, 0 , 1:]
-# In case of 224x224 image, this brings us from 196 to 14 (width=14)
+# In the case of the 224x224 image, this brings us from 196 to 14 (width=14)
 width = int(mask.shape[-1]**0.5)
 mask = mask.reshape(width, width).numpy()
 mask = mask / np.max(mask)
@@ -50,11 +50,11 @@ mask = cv2.resize(mask, (image.shape[-1], image.shape[-2]))
 plt.imshow(mask)
 ```
 
-Simply visualize the raw attention matrix is the most popular method. It's very easy to implement, and yet yield intuitive result.
+Simply visualizing the raw attention matrix is the most popular method. It's very easy to implement, and yet yield intuitive result.
 
-But often the visualizing result is not so idea, either too noisy or not highlighting the true important region. The nice results in paper are often carefully chosen and could not reflect the general explanation performance. Better explanation method is needed.
+But often the visualizing result is not so ideal, either too noisy or not highlighting the truly important region. The nice results in the paper are often carefully chosen and could not reflect the general explanation performance. A better explanation method is needed.
 
-But how? One direction is exploiting more information from Transformer model. We have more attention map from multiple heads and layers, right? Let's use it to aggregate multiple attention matrices from many heads and layers. But here are some difficulties:
+But how? One direction is exploiting more information from the Transformer model. We have more attention maps from multiple heads and layers, right? Let's use it to aggregate multiple attention matrices from many heads and layers. But here are some difficulties:
 
 * **(1) Many attention heads**
 Many heads are useless -- if we prune most of the heads, then the performance will not be affected...
@@ -77,7 +77,7 @@ $$E_h A^{(b)} = \frac{1}{M}\sum_{m}^{}{A_m^{(b)}}$$
 
 (here "b" means block b)
 
-* **(2) Layer (Block) aggregation by (attntion) matrix multiplication**
+* **(2) Layer (Block) aggregation by (attention) matrix multiplication**
 It assumes attentions are combined linearly -- self-attention layers are stacked linearly one after another, and another mechanism (like FFN) does not make any changes to how the model uses input features to make decisions. 
 
 But residual connection matters. So we can model it as $$\hat{A}^{(b)}=I+E_h A^{(b)}$$（you can see it as $$y_i = y_i+\sum_{j}^{}{\alpha_{i,j} v_j}=(1+\alpha_{ii})y_i+\sum_{j\ne i}^{}{\alpha_{i,j} v_j}$$）,  and then normalize it to make each row sum up to 1 again: $$\hat{A}^{(b)}= \hat{A}^{(b)} / \hat{A}^{(b)}.sum(dim=-1)$$ .   
@@ -95,7 +95,7 @@ This is bc we model the attribution of token $$i$$ at block $$b$$ to token $$j$$
 
 #### 1.3 Generic Attention Explainability (GAE) and Transformer Interpretability Beyond Attention Visualization [2,3]
 
-To make the assumptions of (1) and (2) more realistic, [2,3] propose a few improvement: 
+To make the assumptions of (1) and (2) more realistic, [2,3] propose a few improvements: 
 
 * **(1)** **Head aggregation by weighted sum**
 * 
@@ -103,7 +103,7 @@ To make the assumptions of (1) and (2) more realistic, [2,3] propose a few impro
 
 ![图片](/assets/blog1/image13.png)
 
-picture: Visualization of attention map of each head with different color
+Picture: Visualization of attention map of each head with different color
 
 As each head attends to different information, each head should have different importance for different output class predictions. For example, in the plot above, if we want to explain which part of an input image is used by the model to predict class "carrot", then we want only the blue part to be highlighted, so the attention matrix that corresponds to the blue part should have highest weight. And if we average them like what we did in Attention Rollout, we might get a saliency map highlighting all objects rather than the object we want to explain to.
 
@@ -115,7 +115,7 @@ $$E_h A^{(b)} = \frac{1}{M} \sum_{m}^{} ∇A_m^{(b)}\odot A_m^{(b)}$$
 
 (Other choices of aggregation, like taking the minimum, or taking the maximum, don't enable a class-specific signal.)
 
-Besides, since we only care about which part is used to make a dicision, the positive contribution is considered. So we can discard the negative part in the attention matrix:
+Besides, since we only care about which part is used to make a decision, the positive contribution is considered. So we can discard the negative part in the attention matrix:
 
 $$E_h A^{(b)} = \frac{1}{M} \sum_{m}^{} ∇A_m^{(b)} \odot A_m^{(b)+}$$
 
@@ -146,27 +146,27 @@ with torch.no_grad():
 
 #### 1.4 Aggregation methods as hyperparameters
 
-Previously we talk about many ways to aggregate attention matrix. But the results of GAE are not necessarily the best. For example, Sometimes it's better to aggregate attention matrix from the last layer to 4 th layer is better than to the first layer, but sometimes it's worse. So [5] Propose that the ways of aggregation can be hyperparameters:
+Previously we talk about many ways to aggregate attention matrix. But the results of GAE are not necessarily the best. For example, Sometimes it's better to aggregate the attention matrix from the last layer to 4 th layer is better than to the first layer, but sometimes it's worse. So [5] Propose that the ways of aggregation can be hyperparameters:
 
-ways of aggregating over heads, layers: 
+ways of aggregating over multiple heads, and layers: 
 
 * average, 
 * weighted by gradient, or 
-* select only a few, 
+* Select only a few, 
 and ways of extracting rows from the attention matrix: 
 
-* select the row that the corresponding [CLS] token,
+* Select the row that the corresponding [CLS] token,
 * average over all columns,
 * max over columns  
 
 ![图片](/assets/blog1/image6.png)
 
 
-And for each hyperparameter, we evaluate its result, and choose the one that yields the best evaluation results.
+And for each hyperparameter, we evaluate its result and choose the one that yields the best evaluation results.
 
-But it's computationally cost to search over those hyperparamters (because we have to evaluate it many times), so people still prefer using GAE as default.
+But it's computationally costly to search over those hyperparameters (because we have to evaluate them many times), so people still prefer using GAE as default.
 
-#### 1.5 Norm-based method [6]
+#### 1.5 Norm-based methods [6]
 
 [5] Observe that although some tokens might have large attention weights $$\alpha_{ij}$$, their value vector $$f(x_j)$$ is actually very small, so overall it has a small contribution. 
 
@@ -184,11 +184,11 @@ So instead of using attention weights $$\alpha_{ij}$$ as attribution of token $$
 
 (2) Ongoing debate about attention as a faithful explanation.
 There's a debate about whether attention is a faithful explanation. Some of their observations are: attention attribution is not correlated well with other explanation methods' results, and randomly perturbing attention does not affect the model's prediction, which all indicates attention is not a faithful explanation [7].
-But [8] provides a possible answer of why discarding learned attention patterns has a low impact: most parts of token information are preserved by residual connection：
+But [8] provides a possible answer to why discarding learned attention patterns have a low impact: most parts of token information are preserved by residual connection：
 
 ![图片](/assets/blog1/image12.png)
 
-(This is the visualization of the attention map before (left) and after (right) adding residual connection . The right one is diagonal, which means the tokens itself has the highest contribution to themselves)
+(This is the visualization of the attention map before (left) and after (right) adding a residual connection. The right one is diagonal, which means the tokens itself has the highest contribution to themselves)
 So only perturbing attention does not change too much, if they don't change residual connection.
 
 ### 2. Applying explanation methods of CNN to Transformer
@@ -201,14 +201,14 @@ But before Vision Transformer (ViT) was proposed, there were already many explai
 We can use Input gradient, Smoothgrad, and Integrated Gradient in the exact same way as we use in CNN.
 
 Similar to CNN's explanation, we also get a very noisy visualizing result. 
-And for ViT, I also observe a strong checkboard artifact (discontinuity between neighboring patches) from visualizing result:
+And for ViT, I also observe a strong checkboard artifact (discontinuity between neighboring patches) from visualizing the result:
 
 ![图片](/assets/blog1/image8.png)
 
 
 It probably stems from the strided convolutions in ViT (we use strided convolutions as a way to combine cutting image into patches+linear transformation).
 
-For more about strided convolutions causing checkboard artifact, see: [https://distill.pub/2016/deconv-checkerboard/](https://distill.pub/2016/deconv-checkerboard/)
+For more about strided convolutions causing checkboard artifacts, see: [https://distill.pub/2016/deconv-checkerboard/](https://distill.pub/2016/deconv-checkerboard/)
 
 #### 2.2 CAM-based (feature-based) method
 
@@ -235,7 +235,7 @@ But instead of using gradient as weight, we first apply feature maps as masks M 
 ![图片](/assets/blog1/image9.png)
 
 
-Here $Rd$ is a matrix of random numbers, which has the same size as feature map
+Here $Rd$ is a matrix of random numbers, which has the same size as the feature map
 
 The intuition is, if the feature map highlights the important region of the input image, then retaining this region by $$X\odot M_I$$ and masking another region out (or blur it with $$Rd\odot(1-M_i)$$ ) will yield a high output classification score.
 
@@ -244,7 +244,7 @@ The intuition is, if the feature map highlights the important region of the inpu
 
 (1) Value Zeroing [11]
 
-Perturbation-based method aims to measure how much a token uses other context tokens to build its output representation $$\tilde{x}_ i$$ at each encoder layer by perturbing input token.
+Perturbation-based method aims to measure how much a token uses other context tokens to build its output representation $$\tilde{x}_ i$$ at each encoder layer by perturbing the input token.
 
 In Value Zeroing, to measure attribution of input token $$i$$ to output token $$j$$ , it zeros the input value vector of token $$i$$ when calculating the output of token $$j$$ :
 
