@@ -38,7 +38,7 @@ For my report on this topic, see [here](https://drive.google.com/drive/folders/1
 Bosch Industry-on-Campus Lab (Dan Zhang and Anna Khoreva)    
 * Diffusion model + Image editing.
 
-**Research Intern / Research Project，    2022.04 - Present**
+**Research Intern / Research Project，    2022.04 - 2023.05**
 
 University of Tuebingen, Prof. Zeynep Akata      
 * Explanation for vision model (CNNs and ViT). 
