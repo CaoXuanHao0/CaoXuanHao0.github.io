@@ -1,5 +1,5 @@
 ---
-title:  "Generative Modeling for End-to-End Motion Prediction"
+title:  "Generative Modeling for End-to-End Motion Prediction of Autonomous Driving"
 layout: post
 mathjax: true
 ---
