@@ -36,14 +36,14 @@ For my report on this topic, see [here](https://drive.google.com/drive/folders/1
 **Large-scale Generative Models Seminar,    2023.05 - Present**
 
 Bosch Industry-on-Campus Lab (Dan Zhang and Anna Khoreva)    
-* Diffusion model + Image editing.
+* Diffusion model + Prompt-to-Prompt Image editing.
 
 **Research Intern / Research Project，    2022.04 - 2023.05**
 
 University of Tuebingen, Prof. Zeynep Akata      
 * Explanation for vision model (CNNs and ViT). 
-* Feature alignment in ViT. 
-* Multi-modal learning (CLIP)
+* Feature alignment in Vision Transformer. 
+* Multi-modal learning (Improving CLIP)
 
 **Research Assistant，    2020.09 - 2021.05**
 
