@@ -35,7 +35,7 @@ University of Tübingen, Prof. Andreas Geiger
 For my report on this topic, see [here](https://drive.google.com/drive/folders/1K-JNJF6FgVsd3EubLFi3wqdkptTT-ivh?usp=sharing) (still working on it).
 
 
-**Large-scale Generative Models Seminar,    2023.05 - Present**
+**Large-scale Generative Models Seminar,     2023.05 - Present**
 
 Bosch Industry-on-Campus Lab (Dan Zhang and Anna Khoreva)    
 * Diffusion model + [Prompt-to-Prompt Image editing](https://drive.google.com/drive/folders/1fzzvJc_NLh_815zi6sPWqF87SZJbUtIB?usp=sharing).
@@ -56,7 +56,7 @@ Beihang University, Lecturer Hao Peng's group
 
 ### **WORK EXPERIENCE**
 **Hainan JinKen Cyber Information Technology Limited Company，       2020.07 - 2020.09** <br/>
-* Product Development Assistant Intern
+* Software Engineering Intern
 
 
 
