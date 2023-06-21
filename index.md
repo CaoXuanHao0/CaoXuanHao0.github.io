@@ -10,6 +10,8 @@ I am currently seeking an internship from August to November 2023, as well as a 
 
 <br/>
 <hr/>
+My online [Resume](https://drive.google.com/file/d/12e3cM4KYSFVTRnnmppNX_6oFymxhZR4x/view?usp=sharing)
+<hr/>
 
 ### **EDUCATION**
 **University of Tuebingen，      2021.10 - Present (probably 2024.03)**    
