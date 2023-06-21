@@ -6,7 +6,7 @@ mathjax: true
 
 In many applications, we not only need the classification result from Transformer, but also need to explain the model's behavior: how the Transformer makes decisions, which input features the Transformer model uses to make output (classification) decisions, or the contribution of input features to Transformer output. This requires us to explore Explainability in Transformer.
  
-So in this blog, we'll focus on explaining the Transformer model's behavior. We first discuss the most popular method -- the Attention-based method, which is applicable to both Vision and Language models. And then we'll talk about some special methods for explaining the Vision model (Vision Transformer ) -- applying the explanation method in CNN to Transformer.
+So in this blog, I'll focus on explaining the Transformer model's behavior. We first discuss the most popular method -- the Attention-based method, which is applicable to both Vision and Language models. And then I'll talk about some special methods for explaining the Vision model (Vision Transformer) -- applying the explanation method in CNN to Transformer.
 
 
 ### 1. Attention-based method
@@ -57,11 +57,13 @@ But often the visualizing result is not so ideal, either too noisy or not highli
 But how? One direction is exploiting more information from the Transformer model. We have more attention maps from multiple heads and layers, right? Let's use it to aggregate multiple attention matrices from many heads and layers. But here are some difficulties:
 
 * **(1) Many attention heads**
+
 Many heads are useless -- if we prune most of the heads, then the performance will not be affected...
 
 So we can not treat these heads as equal when calculating the saliency map.
 
-* **(2) Many attention layers** 
+* **(2) Many attention layers**
+
 Attentions are combining non-linearly from one layer to the next. 
 
 Successful explanation methods must have their own way to solve these difficulties.
@@ -71,6 +73,7 @@ Successful explanation methods must have their own way to solve these difficulti
 The Attention rollout method makes a few assumptions to simplify the problem:
 
 * **(1) Head aggregation by average**
+
 It assumes all heads are equal, so we can just average over them:
 
 $$E_h A^{(b)} = \frac{1}{M}\sum_{m}^{}{A_m^{(b)}}$$
@@ -78,6 +81,7 @@ $$E_h A^{(b)} = \frac{1}{M}\sum_{m}^{}{A_m^{(b)}}$$
 (here "b" means block b)
 
 * **(2) Layer (Block) aggregation by (attention) matrix multiplication**
+  
 It assumes attentions are combined linearly -- self-attention layers are stacked linearly one after another, and another mechanism (like FFN) does not make any changes to how the model uses input features to make decisions. 
 
 But residual connection matters. So we can model it as $$\hat{A}^{(b)}=I+E_h A^{(b)}$$（you can see it as $$y_i = y_i+\sum_{j}^{}{\alpha_{i,j} v_j}=(1+\alpha_{ii})y_i+\sum_{j\ne i}^{}{\alpha_{i,j} v_j}$$）,  and then normalize it to make each row sum up to 1 again: $$\hat{A}^{(b)}= \hat{A}^{(b)} / \hat{A}^{(b)}.sum(dim=-1)$$ .   
@@ -87,7 +91,7 @@ And then use matrix multiplication to aggregate across layers:
 ![图片](/assets/blog1/image4.png)
 
 
-This is bc we model the attribution of token $$i$$ at block $$b$$ to token $$j$$ at block $$b+1$$ as: 
+This is because we model the attribution of token $$i$$ at block $$b$$ to token $$j$$ at block $$b+1$$ as: 
 
 ![图片](/assets/blog1/image5.png)
 
@@ -98,12 +102,12 @@ This is bc we model the attribution of token $$i$$ at block $$b$$ to token $$j$$
 To make the assumptions of (1) and (2) more realistic, [2,3] propose a few improvements: 
 
 * **(1)** **Head aggregation by weighted sum**
-* 
+
 [4] Observe that different heads attend to different objects or parts:
 
 ![图片](/assets/blog1/image13.png)
 
-Picture: Visualization of attention map of each head with different color
+(Picture: Visualization of attention map of each head with different color)
 
 As each head attends to different information, each head should have different importance for different output class predictions. For example, in the plot above, if we want to explain which part of an input image is used by the model to predict class "carrot", then we want only the blue part to be highlighted, so the attention matrix that corresponds to the blue part should have highest weight. And if we average them like what we did in Attention Rollout, we might get a saliency map highlighting all objects rather than the object we want to explain to.
 
@@ -120,10 +124,11 @@ Besides, since we only care about which part is used to make a decision, the pos
 $$E_h A^{(b)} = \frac{1}{M} \sum_{m}^{} ∇A_m^{(b)} \odot A_m^{(b)+}$$
 
 * **(2) Layer (Block) aggregation by (attention) matrix multiplication**
+
 Same as before.
 
 
-Note that in [2] authors use relevance score R (calculated from LRP) to replace raw attention matrix A, but later in [3] they find out that it's not so helpful, so they use attention matrix A again.
+Note that in [2] authors use relevance score R (calculated from LRP method) to replace raw attention matrix A, but later in [3] they find out that it's not so helpful, so they use attention matrix A again.
 
 Code:
 
