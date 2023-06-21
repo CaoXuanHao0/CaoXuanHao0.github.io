@@ -4,9 +4,9 @@ title: "Home"
 ---
 
 Hello, welcome to my personal webpage!  
-I'm **Xuanhao Cao (曹轩豪)**, a master's student of Machine Learning at the University of Tuebingen.  
-My research interest lies in **Autonomous Driving**, **AIGC**, and **Explainable AI**.  And I'm also very enthusiastic about the latest advance in ML!  
-Currently I'm looking for an internship from August to November 2023. If you have any vacancies, feel free to contact me :)
+I'm **Xuanhao Cao (曹轩豪)**, a master's student of Machine Learning at the University of Tübingen.  
+My research interest includes **Generative AI**, **Multimodal Learning**, and **Explainable AI**.  And I'm also very enthusiastic about the latest advancements in ML!  
+I am currently seeking an internship from August to November 2023, as well as a PhD program starting in March 2024. If you know any available opportunities, feel free to reach out to me :)
 
 <br/>
 <hr/>
@@ -22,7 +22,7 @@ Information System and Information Management | Bachelor
 
 
 **Beihang University，      2018.09 - 2021.06**    
-Math | Bachelor's second degree
+Math | Dual Bachelor degree
 
 
 <br/>
@@ -44,7 +44,7 @@ Bosch Industry-on-Campus Lab (Dan Zhang and Anna Khoreva)
 
 University of Tuebingen, Prof. Zeynep Akata      
 * Explanability for deep learning model (CNNs and Transformer). 
-* Feature alignment in Transformer. 
+* Token feature alignment in Transformer. 
 * Multi-modal learning: [Closing the Modality gap in CLIP's embedding space](https://drive.google.com/drive/folders/1FuC75xdNdOJNAXL1pXv5WpZLyI17FsiK?usp=sharing).
 
 **Research Assistant，    2020.09 - 2021.05**
