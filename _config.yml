@@ -1,6 +1,6 @@
 title: "Xuanhao Cao"
 author: "Xuanhao Cao"
-description: "M.Sc. ML @ Uni Tuebingen"
+description: "M.Sc. ML @ Uni Tübingen"
 permalink: /:title/
 lang: "en"
 excerpt_separator: "\n\n\n"
@@ -21,7 +21,7 @@ navigation:                # accepts {file, title, url, icon, sidebaricon}
 
 
 external:                  # shows a footer with social links - for available icons see fontawesome.com/icons
-  - {title: Email, icon: envelope, url: "mailto:908168202@qq.com"}
+  - {title: Email, icon: envelope, url: "mailto:21xuanhao.cao@gmail.com"}
   - {title: Github, icon: github, url: "https://github.com/CaoXuanHao0"}
   - {title: Linkedin, icon: linkedin, url: "https://linkedin.com/in/xuanhao-cao-b22976242"}
 
