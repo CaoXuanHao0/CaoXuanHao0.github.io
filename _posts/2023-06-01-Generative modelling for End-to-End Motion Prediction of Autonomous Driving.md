@@ -96,7 +96,7 @@ During inference: sample latent future from $$ P(Z \| S) $$:  $$ Z ∼ N (μ_{t}
 **Making Future Prediction**
 
 So the whole process can be simplified as follows:
-(1) Sample latent code $$ Z $$  from $$ P(Z|S) $$, and then (2) feed $$ Z $$ (encode probabilistic future information) and $$ S $$ (encode information of current and past frames) into decoder $$ f_{predict} $$ (usually an RNN), to generate future features $$ \{ y_{t+j} \} _ {j \in J} = f_{predict}(S, Z) $$ that (3) become the inputs of several individual heads to decode these features to downstream prediction task:
+(1) Sample latent code $$ Z $$  from $$ P(Z|S) $$, and then (2) feed $$ Z $$ (encode probabilistic future information) and $$ S $$ (encode information of current and past frames) into decoder $$ f_{predict} $$ (an RNN, CNN, or Attention-based mdoel), to generate future features $$ \{ y_{t+j} \} _ {j \in J} = f_{predict}(S, Z) $$ that (3) become the inputs of several individual heads to decode these features to downstream prediction task:
 
 ![图片](/assets/blog2/prob_simple.jpg)
 
