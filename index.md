@@ -5,8 +5,8 @@ title: "Home"
 
 Hello, welcome to my personal webpage!  
 I'm **Xuanhao Cao (曹轩豪)**, a master's student of Machine Learning at the University of Tübingen.  
-My research interest includes **Generative AI**, **Multimodal Learning**, and **Explainable AI**.  And I'm also very enthusiastic about the latest advancements in ML!  
-I am currently seeking an internship from August to November 2023, as well as a PhD program starting in March 2024. If you know any available opportunities, feel free to reach out to me :)
+My research interest includes **Autonomous Driving**, **Generative AI**, **Multimodal Learning**, and **Explainable AI**.  And I'm also very enthusiastic about the latest advancements in ML!  
+I am currently seeking an internship from August to November 2023 (The earliest possible start date would be July 17th), as well as a PhD program starting in March 2024. If you know of any available opportunities, feel free to reach out to me :)
 
 <br/>
 <hr/>
@@ -24,7 +24,7 @@ Information System and Information Management | Bachelor
 
 
 **Beihang University，      2018.09 - 2021.06**    
-Math | Dual Bachelor degree
+Applied Math | Dual Bachelor degree
 
 
 <br/>
