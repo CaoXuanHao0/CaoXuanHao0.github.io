@@ -75,7 +75,7 @@ In [7], they make the latent variable $$Z$$ as a trainable parameter. And during
 
 **(b) Latent distribution (also called "future distribution in [2]")**
 
-To learn a distribution about latent state $$Z$$, we formulate two latent distributions with and without GT future state $$ Y_{GT}=(y_{t+1}^{GT}, ..., y_{t+T'}^{GT} ) $$: $$ P(Z \|S) $$ and $$ P(Z \|S, Y_{GT}) $$, where $$ P(Z \|S) $$ is what we actually use for inference (cover all the possible modes contained in the future) and need to be learned, while $$ P(Z \|S, Y_{GT}) $$ additionally take ground truth future state as input and thus is used as supervision for learning $$ P(Z \|S) $$. And we learn the $$ P(Z |S) $$ to approximate $$ P(Z \|S, Y_{GT}) $$.
+To learn a distribution about latent state $$Z$$, we formulate two latent distributions with and without GT future state $$ Y_{GT}=(y_{t+1}^{GT}, ..., y_{t+T'}^{GT} ) $$: $$ P(Z \|S) $$ and $$ P(Z \|S, Y_{GT}) $$, where $$ P(Z \|S) $$ is what we actually use for inference (cover all the possible modes contained in the future) and need to be learned, while $$ P(Z \|S, Y_{GT}) $$ additionally take ground truth future state as input and thus is used as supervision for learning $$ P(Z \|S) $$. And we learn the $$ P(Z \|S) $$ to approximate $$ P(Z \|S, Y_{GT}) $$.
 
 (For simplicity,) We parametrize both distributions as diagonal Gaussians with mean $$ μ \in R^L $$ and variance $$ σ^2 \in R^L $$ which are learnable parameters, $$L$$ being the latent dimension: $$ P(Z \| S) = N (μ_{t}, σ^2_{ t}) $$, $$ P(Z \| S,Y_{GT}) = N (μ_{t,gt}, σ^2_{t,gt}) $$.
 
@@ -92,7 +92,7 @@ To learn a distribution about latent state $$Z$$, we formulate two latent distri
 * Concatenate output of all time steps, and feed them to another FC.
 * Output parametrisation of the present distribution: $$ (μ_{t,gt}, σ_{t,gt}) \in R^L × R^L $$.
 
-**Learning the future distribution**
+**Learning the latent distribution**
 
 And then we learn by encouraging $$ P(Z\|S) $$ to mach $$ P(Z \| S, Y_{GT}) $$ by optimizing the following loss (min the KL divergence between two distributions) (or equivalently, optimize ELBO):
 
@@ -118,7 +118,7 @@ Doesn't it look familiar with the recent text-to-image generation?
 
 Unfortunately, all current literature didn't use “real” generative models like GAN, VAE, or diffusion model, but only use a deterministic approach to approximate it (So that's why my PhD research proposal is to use a real generative model to do that. I'll elaborate it in another blog).
 
-If we use a deterministic mapping $$ Y = f_{predict} (S, Z) $$ to implicitly characterize $$ P (Y |S, Z) $$ instead of explicitly representing it in a parametric form, we can avoid factorizing $$ P (Y |S, Z) $$. In this kind of framework, generating scene-consistent future state $$ Y $$ (by sample $$Y$$ from $$ P(Y |S) $$) is simple and highly efficient since it only requires one stage of sampling:
+If we use a deterministic mapping $$ Y = f_{predict} (S, Z) $$ to implicitly characterize $$ P (Y \|S, Z) $$ instead of explicitly representing it in a parametric form, we can avoid factorizing $$ P (Y \|S, Z) $$. In this kind of framework, generating scene-consistent future state $$ Y $$ (by sample $$Y$$ from $$ P(Y \|S) $$) is simple and highly efficient since it only requires one stage of sampling:
 
   Step 1. Sample a latent scene from the latent distribution $$ Z ∼ P (Z \| S) $$
   
