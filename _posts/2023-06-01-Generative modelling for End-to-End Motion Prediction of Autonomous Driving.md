@@ -56,7 +56,7 @@ $$ P (Y |S) = ∫ _Z P (Y |S, Z) P (Z|S) dZ $$
 ![图片](/assets/blog2/latent.jpg)
 ![图片](/assets/blog2/gene.jpg)
 
-So sampling future BEV features $$Y$$ from it $$ Y~P (Y |S) $$ is equivalent as a two stages of sampling:
+So sampling future BEV features $$Y$$ from it $$ Y~P (Y \| S) $$ is equivalent as a two stages of sampling:
 
   Step 1. Sample a latent code from a latent distribution $$ Z ∼ P (Z \| S) $$
   
@@ -67,17 +67,17 @@ So next, I'll elaborate on those two factors one by one.
 
 ## 2.1 Latent distribution P (Z|S)
 
-The existing literatures propose two ways of generating the latent variable $$Z$$.
+Existing literatures propose two ways of generating the latent variable $$Z$$.
 
 **(a) A trainable parameter as latent**
 
-In [], they make the latent variable $$Z$$ as a trainable parameter. And during training, once the labels of future frames are used (in those prediction tasks), the future information is injected into the latent code, so hopefully, the latent code can be learned to be a latent code that generates the future.
+In [7], they make the latent variable $$Z$$ as a trainable parameter. And during training, once the labels of future frames are used (in those prediction tasks), the future information is injected into the latent code, so hopefully, the latent code can be learned to be a latent code that generates the future.
 
 **(b) Latent distribution (also called "future distribution in [2]")**
 
-To learn a distribution about latent state $$Z$$, we formulate two latent distributions with and without GT future state $$ Y_{GT}=(y_{t+1}^{GT}, ..., y_{t+T'}^{GT} ) $$: $$ P(Z|S) $$ and $$ P(Z|S, Y_{GT}) $$, where $$ P(Z|S) $$ is what we actually use for inference (cover all the possible modes contained in the future) and need to be learned, while $$ P(Z|S, Y_{GT}) $$ additionally take ground truth future state as input and thus is used as supervision for learning $$ P(Z|S) $$. And we learn the $$ P(Z|S) $$ to approximate $$ P(Z|S, Y_{GT}) $$.
+To learn a distribution about latent state $$Z$$, we formulate two latent distributions with and without GT future state $$ Y_{GT}=(y_{t+1}^{GT}, ..., y_{t+T'}^{GT} ) $$: $$ P(Z \|S) $$ and $$ P(Z \|S, Y_{GT}) $$, where $$ P(Z \|S) $$ is what we actually use for inference (cover all the possible modes contained in the future) and need to be learned, while $$ P(Z \|S, Y_{GT}) $$ additionally take ground truth future state as input and thus is used as supervision for learning $$ P(Z \|S) $$. And we learn the $$ P(Z |S) $$ to approximate $$ P(Z \|S, Y_{GT}) $$.
 
-(For simplicity,) We parametrize both distributions as diagonal Gaussians with mean $$ μ \in R^L $$ and variance $$ σ^2 \in R^L $$ which are learnable parameters, $$L$$ being the latent dimension: $$ P(Z \| S) = N (μ_{t}, σ^2_{ t}) $$, $$ P(Z \| S,Y_{GT}) = N (μ_{t,gt}, σ^2_{ t,gt}) $$.
+(For simplicity,) We parametrize both distributions as diagonal Gaussians with mean $$ μ \in R^L $$ and variance $$ σ^2 \in R^L $$ which are learnable parameters, $$L$$ being the latent dimension: $$ P(Z \| S) = N (μ_{t}, σ^2_{ t}) $$, $$ P(Z \| S,Y_{GT}) = N (μ_{t,gt}, σ^2_{t,gt}) $$.
 
 **(1) Latent distribution w/o GT: $$ P(Z|S) $$**: represents what could happen given the past context 
 * Input past state feature $$ S $$ that represents the past T frames (as the condition of distribution).
@@ -118,7 +118,7 @@ Doesn't it look familiar with the recent text-to-image generation?
 
 Unfortunately, all current literature didn't use “real” generative models like GAN, VAE, or diffusion model, but only use a deterministic approach to approximate it (So that's why my PhD research proposal is to use a real generative model to do that. I'll elaborate it in another blog).
 
-If we use a deterministic mapping $$ Y = f_{predict} (S, Z) $$ to implicitly characterize $$ P (Y |S, Z) $$ instead of explicitly representing it in a parametric form, we can avoid factorizing $$ P (Y |S, Z) $$. In this kind of framework, generating scene-consistent future state $$ Y $$ (by sample $$Y$$ from $$ P(Y|S) $$) is simple and highly efficient since it only requires one stage of sampling:
+If we use a deterministic mapping $$ Y = f_{predict} (S, Z) $$ to implicitly characterize $$ P (Y |S, Z) $$ instead of explicitly representing it in a parametric form, we can avoid factorizing $$ P (Y |S, Z) $$. In this kind of framework, generating scene-consistent future state $$ Y $$ (by sample $$Y$$ from $$ P(Y |S) $$) is simple and highly efficient since it only requires one stage of sampling:
 
   Step 1. Sample a latent scene from the latent distribution $$ Z ∼ P (Z \| S) $$
   
@@ -144,6 +144,6 @@ In [5] and its follow-up papers [6,8], an RNN is used as $$ f_{predict} $$; and 
 
 [6] Yunpeng Zhang, Zheng Hua Zhu, Wenzhao Zheng, Junjie Huang, Guan Huang, Jie Zhou, and Jiwen Lu. Beverse: Unified perception and prediction in birds-eye-view for vision-centric autonomous driving. ArXiv, abs/2205.09743, 2022.
 
-[7] Shaoheng Fang, Zixun Wang, Yiqi Zhong, Junhao Ge, Siheng Chen, and Yanfeng Wang. Tbp-former: Learning temporal bird’s-eye-view pyramid for joint perception and prediction in vision-centric autonomous driving. ArXiv, abs/2303.09998, 2023.
+[7] Shaoheng Fang, Zixun Wang, Yiqi Zhong, Junhao Ge, Siheng Chen, and Yanfeng Wang. Tbp-former: Learning temporal bird’s-eye-view pyramid for joint perception and prediction in vision-centric autonomous driving. ArXiv, abs/2303.09998, 2023.
 
-[8] Ming Liang, Binh Yang, Wenyuan Zeng, Yun Chen, Rui Hu, Sergio Casas, and Raquel Urtasun. Pnpnet: End-to-end perception and prediction with tracking in the loop. 2020 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), pages 11550–11559, 2020.
+[8] Ming Liang, Binh Yang, Wenyuan Zeng, Yun Chen, Rui Hu, Sergio Casas, and Raquel Urtasun. Pnpnet: End-to-end perception and prediction with tracking in the loop. 2020 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), pages 11550–11559, 2020.
