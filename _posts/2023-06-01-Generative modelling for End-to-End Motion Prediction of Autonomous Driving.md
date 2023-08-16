@@ -65,7 +65,7 @@ So sampling future BEV features $$Y$$ from it $$ Y~P (Y \| S) $$ is equivalent a
 The performance of the generation process is intrinsically dependent on two key factors. Firstly, the quality of the latent code is crucial, as it should encompass the necessary future information required for generating the future map. Secondly, the capacity of the generative process plays a vital role, as it enables the effective fusion of past information and latent information to generate the future feature map.
 So next, I'll elaborate on those two factors one by one.
 
-## 2.1 Latent distribution P (Z|S)
+## 2.1 Latent distribution P(Z|S)
 
 Existing literatures propose two ways of generating the latent variable $$Z$$.
 
@@ -136,7 +136,7 @@ In [5] and its follow-up papers [6,8], an RNN is used as $$ f_{predict} $$; and 
 
 [2] Hu, A., Cotter, F., Mohan, N.C., Gurau, C., & Kendall, A. (2020). Probabilistic Future Prediction for Video Scene Understanding. European Conference on Computer Vision.
 
-[3] Zhiqi Li, Wenhai Wang, Hongyang Li, Enze Xie, Chonghao Sima, Tong Lu, Qiao Yu, and Jifeng Dai. Bevformer: Learning bird’s-eye-view representation from multi-camera images via spatiotemporal transformers. ArXiv, abs/2203.17270, 2022,
+[3] Zhiqi Li, Wenhai Wang, Hongyang Li, Enze Xie, Chonghao Sima, Tong Lu, Qiao Yu, and Jifeng Dai. Bevformer: Learning bird’s-eye-view representation from multi-camera images via spatiotemporal transformers. ArXiv, abs/2203.17270, 2022,
 
 [4] Joel Janai, Fatma Guney, Aseem Behl, and Andreas Geiger. Computer vision for autonomous vehicles: Problems, datasets and state-of-the-art. ArXiv, abs/1704.05519, 2017.
 
