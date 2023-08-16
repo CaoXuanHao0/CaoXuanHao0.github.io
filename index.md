@@ -6,11 +6,11 @@ title: "Home"
 Hello, welcome to my personal webpage!  
 I'm **Xuanhao Cao (曹轩豪)**, a master's student of Machine Learning at the University of Tübingen.  
 My research interest includes **Autonomous Driving**, **Generative AI**, **Multimodal Learning**, and **Explainable AI**.  And I'm also very enthusiastic about the latest advancements in ML!  
-I am currently seeking an internship from August to November 2023 (The earliest possible start date would be July 17th), as well as a PhD program starting in March 2024. If you know of any available opportunities, feel free to reach out to me :)
+I am currently seeking a job / PhD opportunity starting in the winter of 2024. If you know of any available opportunities, feel free to reach out to me :)
 
 <br/>
 <hr/>
-My online [Resume](https://drive.google.com/file/d/12e3cM4KYSFVTRnnmppNX_6oFymxhZR4x/view?usp=sharing)
+My [Resume](https://drive.google.com/file/d/12e3cM4KYSFVTRnnmppNX_6oFymxhZR4x/view?usp=sharing)
 <hr/>
 
 ### **EDUCATION**
@@ -34,7 +34,7 @@ Applied Math | Dual Bachelor degree
 
 University of Tübingen, Prof. Andreas Geiger
 * End-to-end motion prediction for autonomous driving (joint perception and prediction).
-For my report on this topic, see [here](https://drive.google.com/drive/folders/1K-JNJF6FgVsd3EubLFi3wqdkptTT-ivh?usp=sharing) (still working on it).
+For my report on this topic, see [here](https://drive.google.com/drive/folders/1K-JNJF6FgVsd3EubLFi3wqdkptTT-ivh?usp=sharing).
 
 
 **Large-scale Generative Models Seminar,     2023.05 - Present**
