@@ -40,7 +40,7 @@ For my report on this topic, see [here](https://drive.google.com/drive/folders/1
 **Large-scale Generative Models Seminar,     2023.05 - Present**
 
 Bosch Industry-on-Campus Lab (Dan Zhang and Anna Khoreva)    
-* Diffusion model + [Prompt-to-Prompt Image editing](https://drive.google.com/drive/folders/1fzzvJc_NLh_815zi6sPWqF87SZJbUtIB?usp=sharing).
+* Diffusion model + [Prompt-to-Prompt Image editing](https://drive.google.com/drive/folders/1fzzvJc_NLh_815zi6sPWqF87SZJbUtIB?usp=sharing) (control image generation by manipulating attention map, and control attention map by prompt editing).
 
 **Research Intern / Research Project，    2022.04 - 2023.05**
 
