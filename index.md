@@ -14,7 +14,7 @@ My [Resume (English version)](https://drive.google.com/file/d/12e3cM4KYSFVTRnnmp
 <hr/>
 
 ### **EDUCATION**
-**University of Tuebingen，      2021.10 - Present (probably 2024.03)**    
+**University of Tuebingen，      2021.10 - Present (probably 2024.07)**    
 Machine Learning | Master | Department of Computer Science 
 
 [My transcript](https://drive.google.com/file/d/1itEO9-OsGxaYeD6jyT55OqULXkOcTDdp/view?usp=sharing)
@@ -30,14 +30,14 @@ Applied Math | Dual Bachelor degree
 <br/>
 
 ### **RESEARCH EXPERIENCE**
-**Autonomous Vision Seminar，    2023.04 - Present**
+**Autonomous Vision Seminar，    2023.04 - 2023.07**
 
 University of Tübingen, Prof. Andreas Geiger
 * End-to-end motion prediction for autonomous driving (joint perception and prediction).
 For my report on this topic, see [here](https://drive.google.com/drive/folders/1K-JNJF6FgVsd3EubLFi3wqdkptTT-ivh?usp=sharing).
 
 
-**Large-scale Generative Models Seminar,     2023.05 - Present**
+**Large-scale Generative Models Seminar,     2023.05 - 2023.07**
 
 Bosch Industry-on-Campus Lab (Dan Zhang and Anna Khoreva)    
 * Diffusion model + [Prompt-to-Prompt Image editing](https://drive.google.com/drive/folders/1fzzvJc_NLh_815zi6sPWqF87SZJbUtIB?usp=sharing) (control image generation by manipulating attention map, and control attention map by prompt editing).
