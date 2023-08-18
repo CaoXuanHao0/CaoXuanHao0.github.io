@@ -10,7 +10,7 @@ I am currently seeking a job / PhD opportunity starting in the winter of 2024. I
 
 <br/>
 <hr/>
-My [Resume](https://drive.google.com/file/d/12e3cM4KYSFVTRnnmppNX_6oFymxhZR4x/view?usp=sharing)
+My [Resume (English version)](https://drive.google.com/file/d/12e3cM4KYSFVTRnnmppNX_6oFymxhZR4x/view?usp=sharing) [(Chinese version)](https://drive.google.com/file/d/1sZEIeEhutLW96D4tXtwwVWV796DPijQF/view?usp=sharing)
 <hr/>
 
 ### **EDUCATION**
