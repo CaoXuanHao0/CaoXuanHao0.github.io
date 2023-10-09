@@ -10,7 +10,7 @@ I am currently seeking a job / PhD opportunity starting in the winter of 2024. I
 
 <br/>
 <hr/>
-My [Resume (English version)](https://drive.google.com/file/d/12e3cM4KYSFVTRnnmppNX_6oFymxhZR4x/view?usp=sharing) [(Chinese version)](https://drive.google.com/file/d/1sZEIeEhutLW96D4tXtwwVWV796DPijQF/view?usp=sharing)
+My [Resume (English version)](https://drive.google.com/file/d/12e3cM4KYSFVTRnnmppNX_6oFymxhZR4x/view?usp=sharing) [(Chinese version)](https://drive.google.com/file/d/13QuqplKDCJIh9JFHQFlZ2tDmyoE_UZzS/view?usp=sharing)
 <hr/>
 
 ### **EDUCATION**
@@ -30,6 +30,11 @@ Applied Math | Dual Bachelor degree
 <br/>
 
 ### **RESEARCH EXPERIENCE**
+**Perception Intern，    2023.10 - 2023.12**
+
+CARIAD, Volkswagen.
+
+
 **Autonomous Vision Seminar，    2023.04 - 2023.07**
 
 University of Tübingen, Prof. Andreas Geiger
@@ -55,10 +60,6 @@ Beihang University, Lecturer Hao Peng's group
 * Federated Learning, Reinforcement Learning, and Graph Neural Network:  paper reading, assistance with experiments.
 
 <br/>
-
-### **WORK EXPERIENCE**
-**Hainan JinKen Cyber Information Technology Limited Company，       2020.07 - 2020.09** <br/>
-* Software Engineering Intern
 
 
 
