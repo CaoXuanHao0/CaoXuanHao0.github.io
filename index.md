@@ -5,7 +5,7 @@ title: "Home"
 
 Hello, welcome to my personal webpage!  
 I'm **Xuanhao Cao (曹轩豪)**, a master's student of Machine Learning at the University of Tübingen.  
-My research interest includes **Autonomous Driving**, **Generative AI**, **Multimodal Learning**, and **Explainable AI**.  And I'm also very enthusiastic about the latest advancements in ML!  
+My research interest includes **Generative AI (diffusion model, LLM)**, **Multimodal Learning**, and **Autonomous Driving**.  And I'm also very enthusiastic about the latest advancements in AI!  
 I am currently seeking a job / PhD opportunity starting in the winter of 2024. If you know of any available opportunities, feel free to reach out to me :)
 
 <br/>
@@ -30,9 +30,9 @@ Applied Math | Dual Bachelor degree
 <br/>
 
 ### **RESEARCH EXPERIENCE**
-**Perception Intern，    2023.10 - 2023.12**
+**AI Camera Perception Intern，    2023.10 - 2023.12**
 
-CARIAD, Volkswagen.
+CARIAD, Volkswagen Group.
 
 
 **Autonomous Vision Seminar，    2023.04 - 2023.07**
